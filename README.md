@@ -1,0 +1,2 @@
+# CodeGuidelines
+AdGuard Code Guidelines
