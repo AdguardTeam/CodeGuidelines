@@ -10,7 +10,7 @@
   - [Documenting a Method](#documenting-a-method)
   - [Inline Comments](#inline-comments)
 - [General Code Quality](#general-code-quality)
-- [Best Practices](#best-practices)	
+- [Best Practices](#best-practices)
   - [Minimize Visibility](#minimize-visibility)
   - [Exceptions](#exceptions)
   - [Premature Optimization](#premature-optimization)
@@ -31,17 +31,17 @@ Access level modifiers should be explicitly defined when it's possible.
 Examples:
 ```c#
 // Bad.
-class mountainBike	// implicit internal
+class mountainBike  // implicit internal
 {
-	object Frame { get; set; }	// implicit private
-	object[] Wheels { get; set; }	// implicit private
+  object Frame { get; set; }  // implicit private
+  object[] Wheels { get; set; }  // implicit private
 }
 
 // Good.
-private class mountainBike
+private class MountainBike
 {
-	private object Frame { get; set; }
-	private object[] Wheels { get; set; }
+  private object Frame { get; set; }
+  private object[] Wheels { get; set; }
 }
 ```
 
@@ -110,16 +110,16 @@ Examples:
 ```c#
 private void DoSomething()
 {
-	// Bad.
-	long pollInterval;
-	int fileSize;
+  // Bad.
+  long pollInterval;
+  int fileSize;
 }
 
 private void DoSomething()
 {
-	// Good.
-	long pollIntervalMs;
-	int fileSizeGb.
+  // Good.
+  long pollIntervalMs;
+  int fileSizeGb.
 }
 ```
 
@@ -159,14 +159,14 @@ Examples:
 ```c#
 private void DoSomething()
 {
-	// Bad.
-	long PollInterval = Convert.ToInt32(Console.ReadLine());;
+  // Bad.
+  long PollInterval = Convert.ToInt32(Console.ReadLine());;
 }
 
 private void DoSomething()
 {
-	// Good.
-	var pollIntervalMs = Convert.ToInt32(Console.ReadLine());
+  // Good.
+  var pollIntervalMs = Convert.ToInt32(Console.ReadLine());
 }
 ```
 
@@ -198,13 +198,13 @@ Documentation for a class may range from a single sentence to paragraphs with co
 /// </summary>
 public class List<T> : IList<T>, System.Collections.IList, IReadOnlyList<T>
 {
-	...
+  ...
 }
 ```
 
 ### Documenting a Method
 
-A method doc should tell what the method does. Depending on the argument types, it may also be important to document input format.
+A method doc should tell what the method does and what exceptions can be thrown by the method. Depending on the argument types, it may also be important to document input format. 
 
 ```C#
 /// <summary>
@@ -220,7 +220,7 @@ A method doc should tell what the method does. Depending on the argument types, 
 /// <param name="b">A double precision number.</param>
 public static double Add(double a, double b)
 {
-	...
+  ...
 }
 ```
 
@@ -231,15 +231,15 @@ Inline comments should always be added when the intent or purpose of any code is
 ```C#
 private void EnsureCapacity(int min) 
 {
-	if (m_Items.Length < min) 
-	{
-		var newCapacity = m_Items.Length == 0 ? m_DefaultCapacity : m_Items.Length * 2;
-		// Allow the list to grow to maximum possible capacity (~2G elements) before encountering overflow.
-		// Note that this check works even when m_Items.Length overflowed thanks to the (uint) cast
-		if ((uint)newCapacity > Array.MaxArrayLength) newCapacity = Array.MaxArrayLength;
-		if (newCapacity < min) newCapacity = min;
-		Capacity = newCapacity;
-	}
+  if (m_Items.Length < min) 
+  {
+    var newCapacity = m_Items.Length == 0 ? m_DefaultCapacity : m_Items.Length * 2;
+    // Allow the list to grow to maximum possible capacity (~2G elements) before encountering overflow.
+    // Note that this check works even when m_Items.Length overflowed thanks to the (uint) cast
+    if ((uint)newCapacity > Array.MaxArrayLength) newCapacity = Array.MaxArrayLength;
+    if (newCapacity < min) newCapacity = min;
+    Capacity = newCapacity;
+  }
 }
 ```
 
@@ -247,7 +247,7 @@ private void EnsureCapacity(int min)
 
 **Single responsibility principle**
 
-Every module, class or method should have responsibility over a single part of the functionality provided by the software.
+Every module, class or method should have responsibility over a single part of the functionality provided by the software. For the more detailed description of the Single Responsibility Principle from Robert C. Martin follow the [link](https://8thlight.com/blog/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html).
 
 **Line length**
 
@@ -264,13 +264,13 @@ Open braces should always be at the beginning of the line after the statement th
 ```C#
 // bad
 private void DoSomething() {
-	...
+  ...
 }
  
 // good
 private void DoSomething()
 {
-	...
+  ...
 }
 ```
 
@@ -278,23 +278,23 @@ An empty line should be used after block of code in the methods.
 ```C#
 // bad
 private void DoSomething() 
-	{
-	if (foobar)
-	{
-		...
-	}
-	DoAnotherAction();
+{
+  if (foobar)
+  {
+    ...
+  }
+  DoAnotherAction();
 }
  
 // good
 private void DoSomething() 
-	{
-	if (foobar)
-	{
-		...
-	}
-	
-	DoAnotherAction();
+{
+  if (foobar)
+  {
+    ...
+  }
+  
+  DoAnotherAction();
 }
 ```
 
@@ -307,7 +307,7 @@ if (foobar) DoSomething();
 // good
 if (foobar) 
 {
-    DoSomething();
+  DoSomething();
 }
 ```
 
@@ -406,7 +406,7 @@ An empty catch block is usually a bad idea, as you have no signal of a problem. 
 
 **Throw appropriate exception types**
 
-Let your API users obey the "catch narrow exceptions" rule, don't throw `Exception`. Even if you are calling another naughty API that throws `Exception`, at least hide that so it doesn't bubble up even further. You should also make an effort to hide implementation details from your callers when it comes to exceptions.
+Let your API users obey the "catch narrow exceptions" rule, don't throw `Exception`. Even if you are calling another naughty API that throws `Exception`, at least hide that so it doesn't bubble up even further. You should also make an effort to hide implementation details from your callers when it comes to exceptions. Also, don't forget to add the information about exceptions to the method's documentation, as it was described in [Documenting a Method](#documenting-a-method).
 
 ```C#
 // Bad.
@@ -438,8 +438,8 @@ public DataStore
 {
   public string FetchValue(string key)
   {
-	...
-	throw new StorageException("error message");
+    ...
+    throw new StorageException("error message");
   }
   
   public class StorageException : Exception
@@ -470,7 +470,7 @@ Use IDisposable interface to free all the resources from the memory. Once you im
 ```C#
 using (PersonDataSource personDataSource = DataSource.GetPerson())
 {
-    // write your code here
+  // write your code here
 }
 ```
 
