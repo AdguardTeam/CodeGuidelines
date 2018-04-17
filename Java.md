@@ -177,6 +177,14 @@ if (controller == null) {
 
 ## General Code Quality
 
+**File organization**
+
+1. Class (static) variables: First the public class variables, then the protected, and then the private.
+2. Class (static) methods.
+3. Instance variables: First public, then protected, and then private.
+4. Constructors
+5. Methods: list all the public methods first, and then all the private ones - that means it's easy to separate the API from the implementation, even when there's no interface involved.
+
 **Line length**
 
 Try to limit line length. This limit can be arbitrary (e.g. 80 or 100 characters) and not rigidly enforced, but the goal is to reduce the amount of horizontal scrolling for the developer.
