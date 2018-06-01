@@ -344,7 +344,7 @@ var myObject = {
 // bad
 var myObject = {
     foo : 1,
-    bar : 2, // trailing comma
+    bar : 2 // no trailing comma
 };
 ```
 
