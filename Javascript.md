@@ -324,17 +324,28 @@ var a = obj;
 
 ### Trailing Commas
 
-**Avoid** using trailing commas.
+**Avoid** using trailing commas.  
 
 ```javascript
 // bad
+var myArray = [ 1, 2, 3, ]; // trailing comma
+
+// good
+var myArray = [ 1, 2, 3]; // no trailing comma
+```
+Use trailing commas in the multiline statements
+```javascript
+// good
 var myObject = {
     foo : 1,
     bar : 2, // trailing comma
 };
 
 // bad
-var myArray = [ 1, 2, 3, ]; // trailing comma
+var myObject = {
+    foo : 1,
+    bar : 2, // trailing comma
+};
 ```
 
 ### Brackets and Blocks
