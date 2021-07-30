@@ -69,42 +69,6 @@ The rules are mostly sorted in the alphabetical order.
     Constructors should validate their arguments and return meaningful errors.
     As a corollary, avoid lazy initialization.
 
- *  <a href="#li-baa640a3" id="li-baa640a3" name="li-baa640a3">§</a>
-    Don't mix horizontal and vertical placement of arguments in function and
-    method calls.  That is, either this:
-
-    ```go
-    err := f(a, b, c)
-    ```
-
-    Or, when the arguments are too long, this:
-
-    ```go
-    err := functionWithALongName(
-            firstArgumentWithALongName,
-            secondArgumentWithALongName,
-            thirdArgumentWithALongName,
-    )
-    ```
-
-    Or, with a struct literal:
-
-    ```go
-    err := functionWithALongName(arg, structType{
-            field1: val1,
-            field2: val2,
-    })
-    ```
-
-    But **never** this:
-
-    ```go
-    err := functionWithALongName(firstArgumentWithALongName,
-            secondArgumentWithALongName,
-            thirdArgumentWithALongName,
-    )
-    ```
-
  *  <a href="#li-450c3236" id="li-450c3236" name="li-450c3236">§</a>
     Don't rely only on file names for build tags to work.  Always add build tags
     as well.
@@ -165,12 +129,47 @@ The rules are mostly sorted in the alphabetical order.
 
 ##  <a href="#commenting" id="commenting" name="commenting">Commenting</a>
 
- *  <a href="#li-20ddc8de" id="li-20ddc8de" name="li-20ddc8de">§</a>
-    See also the [text guidelines][text].
+See also the [text guidelines][text].
 
  *  <a href="#li-4e61a581" id="li-4e61a581" name="li-4e61a581">§</a>
     Document everything, including unexported top-level identifiers, to build
     a habit of writing documentation.
+
+ *  <a href="#li-baa640a3" id="li-baa640a3" name="li-baa640a3">§</a>
+    Don't mix horizontal and vertical placement of arguments in function and
+    method calls.  That is, either this:
+
+    ```go
+    err := f(a, b, c)
+    ```
+
+    Or, when the arguments are too long, this:
+
+    ```go
+    err := functionWithALongName(
+            firstArgumentWithALongName,
+            secondArgumentWithALongName,
+            thirdArgumentWithALongName,
+    )
+    ```
+
+    Or, with a struct literal:
+
+    ```go
+    err := functionWithALongName(arg, structType{
+            field1: val1,
+            field2: val2,
+    })
+    ```
+
+    But **never** this:
+
+    ```go
+    err := functionWithALongName(firstArgumentWithALongName,
+            secondArgumentWithALongName,
+            thirdArgumentWithALongName,
+    )
+    ```
 
  *  <a href="#li-2b24cce6" id="li-2b24cce6" name="li-2b24cce6">§</a>
     Don't put identifiers into any kind of quotes.
@@ -312,6 +311,11 @@ The rules are mostly sorted in the alphabetical order.
     Don't use underscores in file and package names, unless they're build tags
     or for tests.  This is to prevent accidental build errors with weird tags.
 
+
+ *  <a href="#li-5a2d4941" id="li-5a2d4941" name="li-5a2d4941">§</a>
+    For brands or words with more than 1 capital letter, lowercase all letters:
+    `githubToken`, **not** `gitHubToken`.
+
  *  <a href="#li-a3a30716" id="li-a3a30716" name="li-a3a30716">§</a>
     Name benchmarks and tests using the same convention as examples.  For
     example:
@@ -323,6 +327,14 @@ The rules are mostly sorted in the alphabetical order.
     func TestType_Method_suffix(t *testing.T) { /* … */ }
     ```
 
+ *  <a href="#li-4b3adb1b" id="li-4b3adb1b" name="li-4b3adb1b">§</a>
+    Name `context.Context` helper functions that return values from the context
+    `FooFromContext` and the ones that return a new contest with new values,
+    `WithFoo`.
+
+ *  <a href="#li-17e872ff" id="li-17e872ff" name="li-17e872ff">§</a>
+    Name deferred errors (e.g. when closing something) `derr`.
+
  *  <a href="#li-ac62f22b" id="li-ac62f22b" name="li-ac62f22b">§</a>
     Name parameters in interface definitions:
 
@@ -331,9 +343,6 @@ The rules are mostly sorted in the alphabetical order.
             Frobulate(f Foo, b Bar) (r Result, err error)
     }
     ```
-
- *  <a href="#li-17e872ff" id="li-17e872ff" name="li-17e872ff">§</a>
-    Name the deferred errors (e.g. when closing something) `derr`.
 
  *  <a href="#li-0251df78" id="li-0251df78" name="li-0251df78">§</a>
     Unused arguments in anonymous functions must be called `_`:
@@ -395,8 +404,15 @@ The rules are mostly sorted in the alphabetical order.
 
 ##  <a href="#recommended-reading" id="recommended-reading" name="recommended-reading">Recommended Reading</a>
 
- *  <https://github.com/golang/go/wiki/CodeReviewComments>.
+Here are some links that describe the common ways Go code is written or have
+inspire some of the rules we use here:
 
- *  <https://github.com/golang/go/wiki/TestComments>.
+ *  [The Go Wiki: Go Code Review Comments][rev]
+ *  [The Go Wiki: Go Test Comments][test]
+ *  [Go Proverbs][prov]
+ *  [Dmitri Shuralyov: Idiomatic Go][shur]
 
- *  <https://go-proverbs.github.io/>
+[prov]: https://go-proverbs.github.io/
+[rev]:  https://github.com/golang/go/wiki/CodeReviewComments
+[shur]: https://dmitri.shuralyov.com/idiomatic-go
+[test]: https://github.com/golang/go/wiki/TestComments
