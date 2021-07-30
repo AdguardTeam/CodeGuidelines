@@ -69,11 +69,6 @@ The rules are mostly sorted in the alphabetical order.
     Constructors should validate their arguments and return meaningful errors.
     As a corollary, avoid lazy initialization.
 
- *  <a href="#li-edd678a8" id="li-edd678a8" name="li-edd678a8">§</a>
-    Prefer to define methods on pointer receivers, unless the type is small or
-    a non-pointer receiver is required, for example `MarshalFoo` methods (see
-    [`staticcheck` issue 911][staticcheck-911]).
-
  *  <a href="#li-baa640a3" id="li-baa640a3" name="li-baa640a3">§</a>
     Don't mix horizontal and vertical placement of arguments in function and
     method calls.  That is, either this:
@@ -122,14 +117,6 @@ The rules are mostly sorted in the alphabetical order.
  *  <a href="#li-71081433" id="li-71081433" name="li-71081433">§</a>
     Don't use naked `return`s.
 
- *  <a href="#li-73ab5406" id="li-73ab5406" name="li-73ab5406">§</a>
-    Don't write non-test code with more than four (**4**) levels of indentation.
-    Just like [Linus said], plus an additional level for an occasional error
-    check or struct initialization.
-
-    The exception proving the rule is the table-driven test code, where an
-    additional level of indentation is allowed.
-
  *  <a href="#li-6eedb3ac" id="li-6eedb3ac" name="li-6eedb3ac">§</a>
     Eschew external dependencies, including transitive, unless absolutely
     necessary.
@@ -151,6 +138,11 @@ The rules are mostly sorted in the alphabetical order.
     Prefer defining `Foo.String` and `ParseFoo` in terms of `Foo.MarshalText`
     and `Foo.UnmarshalText` correspondingly and not the other way around.
 
+ *  <a href="#li-edd678a8" id="li-edd678a8" name="li-edd678a8">§</a>
+    Prefer to define methods on pointer receivers, unless the type is small or
+    a non-pointer receiver is required, for example `MarshalFoo` methods (see
+    [`staticcheck` issue 911][staticcheck-911]).
+
  *  <a href="#li-8e702ad5" id="li-8e702ad5" name="li-8e702ad5">§</a>
     Prefer to use named functions for goroutines.
 
@@ -164,6 +156,10 @@ The rules are mostly sorted in the alphabetical order.
  *  <a href="#li-4c8cc15a" id="li-4c8cc15a" name="li-4c8cc15a">§</a>
     Write logs and error messages in lowercase only to make it easier to `grep`
     logs and error messages without using the `-i` flag.
+
+[constant errors]:  https://dave.cheney.net/2016/04/07/constant-errors
+[staticcheck-911]:  https://github.com/dominikh/go-tools/issues/911
+[text]:             Text.md
 
 
 
@@ -216,6 +212,14 @@ The rules are mostly sorted in the alphabetical order.
     where a `iota` may be used or where all constants belong to a certain type,
     there is no reason to group `type`s.
 
+ *  <a href="#li-73ab5406" id="li-73ab5406" name="li-73ab5406">§</a>
+    Don't write non-test code with more than four (**4**) levels of indentation.
+    Just like [Linus said][3tabs], plus an additional level for an occasional
+    error check or struct initialization.
+
+    The exception proving the rule is the table-driven test code, where an
+    additional level of indentation is allowed.
+
  *  <a href="#li-537482f3" id="li-537482f3" name="li-537482f3">§</a>
     Group `require.*` blocks together with the preceding related statements, but
     separate from the following `assert.*` and unrelated requirements.
@@ -227,6 +231,55 @@ The rules are mostly sorted in the alphabetical order.
 
     assert.Equal(t, expected, val)
     ```
+
+ *  <a href="#li-46a924cd" id="li-46a924cd" name="li-46a924cd">§</a>
+    Put deferred calls of destructors, for example `f.Close()`, into the same
+    paragraph as constructors.  This is an exception to the [paragraph
+    rule][par].
+
+    ```go
+    f, err := os.Open(fileName)
+    if err != nil {
+            return err
+    }
+    defer func() { processError(f.Close()) }()
+    ```
+
+ *  <a href="#li-f2156af9" id="li-f2156af9" name="li-f2156af9">§</a>
+    Start a new paragraph after the final closing curly brace of a block.  So
+    this:
+
+    ```go
+    if a == b {
+            // …
+    }
+
+    for i := 0; i < N; i++ {
+            // …
+    }
+
+    switch x {
+            // …
+    }
+    ```
+
+    and **not** this:
+
+    ```go
+    // Bad!
+    if a == b {
+            // …
+    }
+    for i := 0; i < N; i++ {
+            // …
+    }
+    switch x {
+            // …
+    }
+    ```
+
+    The exceptions are the final block inside a bigger block and the [desctuctor
+    `defer`s][dtr].
 
  *  <a href="#li-0a444faf" id="li-0a444faf" name="li-0a444faf">§</a>
     Use `gofumpt --extra -s`.
@@ -246,6 +299,10 @@ The rules are mostly sorted in the alphabetical order.
             // …
     }}
     ```
+
+[3tabs]: https://www.kernel.org/doc/html/v4.17/process/coding-style.html#indentation
+[dtr]:   #li-46a924cd
+[par]:   #li-f2156af9
 
 
 
@@ -343,10 +400,3 @@ The rules are mostly sorted in the alphabetical order.
  *  <https://github.com/golang/go/wiki/TestComments>.
 
  *  <https://go-proverbs.github.io/>
-
-
-
-[Linus said]:       https://www.kernel.org/doc/html/v4.17/process/coding-style.html#indentation
-[constant errors]:  https://dave.cheney.net/2016/04/07/constant-errors
-[staticcheck-911]:  https://github.com/dominikh/go-tools/issues/911
-[text]:             Text.md

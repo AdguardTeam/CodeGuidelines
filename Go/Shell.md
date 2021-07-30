@@ -35,7 +35,7 @@ The rules are mostly sorted in the alphabetical order.
     export X
     ```
 
-    And **not** this:
+    and **not** this:
 
     ```sh
     # Bad!
@@ -98,7 +98,7 @@ The rules are mostly sorted in the alphabetical order.
     dir="${TOP_DIR}/sub"
     ```
 
-    And **not** this:
+    and **not** this:
 
     ```sh
     # Bad!
