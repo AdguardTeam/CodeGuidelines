@@ -90,7 +90,7 @@
  *  <a href="#li-e2113143" id="li-e2113143" name="li-e2113143">§</a>
     Prefer triple-backtick fenced code blocks with language tags as info strings
     to indented code blocks and fenced code blocks without info strings.  If the
-    code block must contain a triple-backtick itself, use triple-tilda fenced
+    code block must contain a triple-backtick itself, use triple-tilde fenced
     code blocks instead.
 
  *  <a href="#li-0f43f94c" id="li-0f43f94c" name="li-0f43f94c">§</a>

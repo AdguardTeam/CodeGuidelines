@@ -75,7 +75,7 @@ The rules are mostly sorted in the alphabetical order.
 
  *  <a href="#li-7a36cc4c" id="li-7a36cc4c" name="li-7a36cc4c">§</a>
     Don't use `fmt.Sprintf` where a more structured approach to string
-    conversion could be used.  For example, `aghnet.JoinHostPort`,
+    conversion could be used.  For example, `netutil.JoinHostPort`,
     `net.JoinHostPort` or `url.(*URL).String`.
 
  *  <a href="#li-71081433" id="li-71081433" name="li-71081433">§</a>
@@ -135,42 +135,6 @@ See also the [text guidelines][text].
     Document everything, including unexported top-level identifiers, to build
     a habit of writing documentation.
 
- *  <a href="#li-baa640a3" id="li-baa640a3" name="li-baa640a3">§</a>
-    Don't mix horizontal and vertical placement of arguments in function and
-    method calls.  That is, either this:
-
-    ```go
-    err := f(a, b, c)
-    ```
-
-    Or, when the arguments are too long, this:
-
-    ```go
-    err := functionWithALongName(
-            firstArgumentWithALongName,
-            secondArgumentWithALongName,
-            thirdArgumentWithALongName,
-    )
-    ```
-
-    Or, with a struct literal:
-
-    ```go
-    err := functionWithALongName(arg, structType{
-            field1: val1,
-            field2: val2,
-    })
-    ```
-
-    But **never** this:
-
-    ```go
-    err := functionWithALongName(firstArgumentWithALongName,
-            secondArgumentWithALongName,
-            thirdArgumentWithALongName,
-    )
-    ```
-
  *  <a href="#li-2b24cce6" id="li-2b24cce6" name="li-2b24cce6">§</a>
     Don't put identifiers into any kind of quotes.
 
@@ -210,6 +174,69 @@ See also the [text guidelines][text].
     Don't group type declarations together.  Unlike with blocks of `const`s,
     where a `iota` may be used or where all constants belong to a certain type,
     there is no reason to group `type`s.
+
+ *  <a href="#li-baa640a3" id="li-baa640a3" name="li-baa640a3">§</a>
+    Don't mix horizontal and vertical placement of groups of arguments and
+    [return values][ret] in calls and definitions of functions and methods.
+    That is, either this:
+
+    ```go
+    func f(a, b, c T) {
+            // …
+    }
+    ```
+
+    ```go
+    err := f(a, b, c)
+    ```
+
+    Or, when the arguments are too long, this:
+
+    ```go
+    func functionWithALongName(
+            firstArgumentWithALongName typeWithALongName,
+            secondArgumentWithALongName otherTypeWithALongName,
+            thirdArgumentWithALongName thirdTypeWithALongName,
+    ) {
+            // …
+    }
+    ```
+
+    ```go
+    err := functionWithALongName(
+            firstArgumentWithALongName,
+            secondArgumentWithALongName,
+            thirdArgumentWithALongName,
+    )
+    ```
+
+    Or, with a call with a struct literal:
+
+    ```go
+    err := functionWithALongName(arg, structType{
+            field1: val1,
+            field2: val2,
+    })
+    ```
+
+    But **never** this:
+
+    ```go
+    // Bad!
+    func functionWithALongName(firstArgumentWithALongName typeWithALongName,
+            secondArgumentWithALongName otherTypeWithALongName,
+            thirdArgumentWithALongName thirdTypeWithALongName) {
+            // …
+    }
+    ```
+
+    ```go
+    // Bad!
+    err := functionWithALongName(firstArgumentWithALongName,
+            secondArgumentWithALongName,
+            thirdArgumentWithALongName,
+    )
+    ```
 
  *  <a href="#li-73ab5406" id="li-73ab5406" name="li-73ab5406">§</a>
     Don't write non-test code with more than four (**4**) levels of indentation.
@@ -277,11 +304,36 @@ See also the [text guidelines][text].
     }
     ```
 
-    The exceptions are the final block inside a bigger block and the [desctuctor
+    The exceptions are the final block inside a bigger block and the [destructor
     `defer`s][dtr].
 
  *  <a href="#li-0a444faf" id="li-0a444faf" name="li-0a444faf">§</a>
     Use `gofumpt --extra -s`.
+
+ *  <a href="#li-d9b8f5a8" id="li-d9b8f5a8" name="li-d9b8f5a8">§</a>
+    When a function's definition becomes [too long][long], first make the
+    function's arguments vertically placed and only then do the same with the
+    return values.  That is, do this:
+
+    ```go
+    func functionWithALongName(
+            argumentWithALongName typeWithALongName,
+    ) (returnValueWithALongName typeWithALongName, err error) {
+            // …
+    }
+    ```
+
+    and **not** this:
+
+    ```go
+    // Bad!
+    func functionWithALongName(argumentWithALongName typeWithALongName) (
+            returnValueWithALongName typeWithALongName,
+            err error,
+    ) {
+            // …
+    }
+    ```
 
  *  <a href="#li-202c752c" id="li-202c752c" name="li-202c752c">§</a>
     Write slices of struct like this:
@@ -301,16 +353,20 @@ See also the [text guidelines][text].
 
 [3tabs]: https://www.kernel.org/doc/html/v4.17/process/coding-style.html#indentation
 [dtr]:   #li-46a924cd
+[long]:  #li-baa640a3
 [par]:   #li-f2156af9
-
+[ret]:   #li-d9b8f5a8
 
 
 ##  <a href="#naming" id="naming" name="naming">Naming</a>
 
+ *  <a href="#li-58922472" id="li-58922472" name="li-58922472">§</a>
+    Example files should be names `example_test.go` if there is one such file
+    for the whole package and `foo_example_test.go` if there are several.
+
  *  <a href="#li-cc358586" id="li-cc358586" name="li-cc358586">§</a>
     Don't use underscores in file and package names, unless they're build tags
     or for tests.  This is to prevent accidental build errors with weird tags.
-
 
  *  <a href="#li-5a2d4941" id="li-5a2d4941" name="li-5a2d4941">§</a>
     For brands or words with more than 1 capital letter, lowercase all letters:
@@ -388,6 +444,9 @@ See also the [text guidelines][text].
 
 ##  <a href="#testing" id="testing" name="testing">Testing</a>
 
+ *  <a href="#li-a52e192a" id="li-a52e192a" name="li-a52e192a">§</a>
+    Put all tests into a separate [test package][tpkg].
+
  *  <a href="#li-9124bf62" id="li-9124bf62" name="li-9124bf62">§</a>
     Use `assert.NoError` and `require.NoError` instead of `assert.Nil` and
     `require.Nil` on errors.
@@ -399,6 +458,8 @@ See also the [text guidelines][text].
  *  <a href="#li-2b1b6414" id="li-2b1b6414" name="li-2b1b6414">§</a>
     Use functions like `require.Foo` instead of `assert.Foo` when the test
     cannot continue if the condition is false.
+
+[tpkg]: https://pkg.go.dev/cmd/go@master#hdr-Test_packages
 
 
 
