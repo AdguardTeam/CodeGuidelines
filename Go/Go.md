@@ -138,6 +138,18 @@ See also the [text guidelines][text].
  *  <a href="#li-2b24cce6" id="li-2b24cce6" name="li-2b24cce6">§</a>
     Don't put identifiers into any kind of quotes.
 
+ *  <a href="#li-cc1ce4d8" id="li-cc1ce4d8" name="li-cc1ce4d8">§</a>
+    Prefer to add a file header comment describing what this file should
+    contain.  For example, a file like `validation.go` could start like this:
+
+    ```go
+    package user
+
+    import "strings"
+
+    // User Validation
+    ```
+
  *  <a href="#li-7eda22b4" id="li-7eda22b4" name="li-7eda22b4">§</a>
     Put comments above the documented entity, **not** to the side, to improve
     readability.

@@ -13,8 +13,23 @@ The rules are mostly sorted in the alphabetical order.
     Avoid overly technical and markup-ey comments.  Write comments for people,
     with full sentences and proper punctuation.
 
+ *  <a href="#li-2db43ebe" id="li-2db43ebe" name="li-2db43ebe">§</a>
+    Capitalize every letter in a header or title.  So, a header should be
+    something like this:
+
+    ```none
+    Using The New API
+    ```
+
+    and **not** like this:
+
+    ```none
+    Using the New API
+    ```
+
  *  <a href="#li-658f569b" id="li-658f569b" name="li-658f569b">§</a>
-    End sentences with appropriate punctuation.
+    End sentences with appropriate punctuation.  Do not add full stops to
+    headers.
 
  *  <a href="#li-4df3b56b" id="li-4df3b56b" name="li-4df3b56b">§</a>
     Headers should be written with all initial letters capitalized, except for
