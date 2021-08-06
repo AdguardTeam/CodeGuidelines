@@ -2,13 +2,14 @@
 
  *  <a href="#li-b085c724" id="li-b085c724" name="li-b085c724">§</a>
     Call your branches either `NNNN-fix-foo` (where `NNNN` is the ID of the
-    GitHub issue you worked on in this branch) or just `fix-foo` if there was no
-    GitHub issue.
+    GitHub / GitLab / Jira issue you worked on in this branch) or just `fix-foo`
+    if there was no issue.  Make sure to always spell the Jira IDs (but [not the
+    suffix][low]) in uppercase letters to make sure it gets linked.
 
  *  <a href="#li-6ff49977" id="li-6ff49977" name="li-6ff49977">§</a>
     Do not put your text editors' temporary files into the project's
     `.gitignore` files.  The more are added, the harder they become to maintain.
-    Put them into your [global `.gitignore`][ignore[ file instead.
+    Put them into your [global `.gitignore`][ignore] file instead.
 
     Only build, run, and test outputs should be placed into `.gitignore`,
     sorted, with negations at the bottom to make sure they take effect.
@@ -31,8 +32,10 @@
     Only use lowercase letters in your commit message headers.  The rest of the
     message should follow the [plain text conventions][text].
 
-    The only exceptions are direct mentions of identifiers from the source code
-    and filenames like `HACKING.md`.
+    The exceptions are direct mentions of identifiers from the source code and
+    filenames like `HACKING.md` as well as [issue IDs][jira].
 
 [ignore]: https://stackoverflow.com/a/7335487/1892060.
+[jira]:   #li-b085c724
+[low]:    #li-b5f7773a
 [text]:   Text.md
