@@ -69,6 +69,34 @@ The rules are mostly sorted in the alphabetical order.
     Constructors should validate their arguments and return meaningful errors.
     As a corollary, avoid lazy initialization.
 
+ *  <a href="#li-eaba198b" id="li-eaba198b" name="li-eaba198b">§</a>
+    Context values should be considered immutable.  Do not use modifications
+    of context values as a means of communicating something up the stack.  That
+    is, do **not** do this:
+
+    ```go
+    // Bad!  Function outer expects inner to mutate logEntry.
+    func outer(ctx context.Context, /* … */) {
+            logEntry := &LogEntry{}
+            ctx = contextWithLogEntry(ctx, logEntry)
+
+            inner(ctx, /* … */)
+
+            if logEntry.Success {
+                    // …
+            }
+    }
+
+    // Bad!  Function inner mutates logEntry just so that outer could receive
+    // that change.
+    func inner(ctx context.Context, /* … */) {
+            logEntry := logEntryFromContext(ctx)
+            logEntry.Success = true
+
+            // …
+    }
+    ```
+
  *  <a href="#li-450c3236" id="li-450c3236" name="li-450c3236">§</a>
     Don't rely only on file names for build tags to work.  Always add build tags
     as well.
@@ -107,6 +135,9 @@ The rules are mostly sorted in the alphabetical order.
     a non-pointer receiver is required, for example `MarshalFoo` methods (see
     [`staticcheck` issue 911][staticcheck-911]).
 
+ *  <a href="#li-c178ad65" id="li-c178ad65" name="li-c178ad65">§</a>
+    Prefer to [return structs and accept interfaces][struct].
+
  *  <a href="#li-8e702ad5" id="li-8e702ad5" name="li-8e702ad5">§</a>
     Prefer to use named functions for goroutines.
 
@@ -121,6 +152,15 @@ The rules are mostly sorted in the alphabetical order.
     Write logs and error messages in lowercase only to make it easier to `grep`
     logs and error messages without using the `-i` flag.
 
+ *  <a href="#li-8c55e31a" id="li-8c55e31a" name="li-8c55e31a">§</a>
+    Write static interface type checks like this, including the comment:
+
+    ```go
+    // type check
+    var _ ifaceType = (*implType)(nil)
+    ```
+
+[struct]:           https://medium.com/@cep21/what-accept-interfaces-return-structs-means-in-go-2fe879e25ee8
 [constant errors]:  https://dave.cheney.net/2016/04/07/constant-errors
 [staticcheck-911]:  https://github.com/dominikh/go-tools/issues/911
 [text]:             Text.md
