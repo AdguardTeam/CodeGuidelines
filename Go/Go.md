@@ -29,6 +29,18 @@ The rules are mostly sorted in the alphabetical order.
 
 ##  <a href="#code" id="code" name="code">Code</a>
 
+ *  <a href="#li-651fcd50" id="li-651fcd50" name="li-651fcd50">§</a>
+    Add context to errors but avoid duplication.  For example, `os.Open` alwyas
+    adds the path to its error, so this is redundant:
+
+    ```go
+    // Bad!  Will duplicate the file name.
+    f, err := os.Open(fileName)
+    if err != nil {
+            return fmt.Errorf("opening %q: %w", fileName, err)
+    }
+    ```
+
  *  <a href="#li-5305b436" id="li-5305b436" name="li-5305b436">§</a>
     Always `recover` from panics in new goroutines.  Preferably in the very
     first statement.  If all you want there is a log message, use `log.OnPanic`.
@@ -47,6 +59,9 @@ The rules are mostly sorted in the alphabetical order.
  *  <a href="#li-6ae6bc94" id="li-6ae6bc94" name="li-6ae6bc94">§</a>
     Avoid `new`, especially with structs, unless a temporary value is needed,
     for example when checking the type of an error using `errors.As`.
+
+ *  <a href="#li-c9d7fde7" id="li-c9d7fde7" name="li-c9d7fde7">§</a>
+    Avoid package `reflect` unless absolutely necessary.
 
  *  <a href="#li-6f8bd178" id="li-6f8bd178" name="li-6f8bd178">§</a>
     Check against empty strings like this:
@@ -113,6 +128,11 @@ The rules are mostly sorted in the alphabetical order.
     Eschew external dependencies, including transitive, unless absolutely
     necessary.
 
+ *  <a href="#li-b34a7563" id="li-b34a7563" name="li-b34a7563">§</a>
+    In templates, put spaces between the delimeters (`{{` and `}}` by default)
+    and the content, because when the minus sign is used to remove whitespace,
+    it's an error to omit these spaces.
+
  *  <a href="#li-9d94cb85" id="li-9d94cb85" name="li-9d94cb85">§</a>
     Minimize scope of variables as much as possible.
 
@@ -141,12 +161,17 @@ The rules are mostly sorted in the alphabetical order.
  *  <a href="#li-8e702ad5" id="li-8e702ad5" name="li-8e702ad5">§</a>
     Prefer to use named functions for goroutines.
 
+ *  <a href="#li-2ea2bbf3" id="li-2ea2bbf3" name="li-2ea2bbf3">§</a>
+    Prefer to use package `golang.org/x/sys` and not package `syscall`, as the
+    latter is frozen.
+
  *  <a href="#li-6e457108" id="li-6e457108" name="li-6e457108">§</a>
     Program code lines should not be longer than one hundred (**100**) columns.
     For comments, see the [text guidelines][text].
 
  *  <a href="#li-4bfdabf9" id="li-4bfdabf9" name="li-4bfdabf9">§</a>
-    Use linters.  `make go-lint`.
+    Use linters.  `make go-lint`, if the project has one.  A minimum of
+    `go vet`, `errcheck`, and staticcheck if the project does not.
 
  *  <a href="#li-4c8cc15a" id="li-4c8cc15a" name="li-4c8cc15a">§</a>
     Write logs and error messages in lowercase only to make it easier to `grep`
