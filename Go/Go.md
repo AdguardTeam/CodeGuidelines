@@ -412,6 +412,23 @@ See also the [text guidelines][text].
     }
     ```
 
+ *  <a href="#li-1f286e31" id="li-1f286e31" name="li-1f286e31">§</a>
+    Write `switch`es with large lists of values in one `case` like this:
+
+    ```go
+    switch n {
+    case
+            longValueName1,
+            longValueName2,
+            longValueName3,
+            longValueName4,
+            longValueName5:
+            return true
+    default:
+            return false
+    }
+    ```
+
  *  <a href="#li-202c752c" id="li-202c752c" name="li-202c752c">§</a>
     Write slices of struct like this:
 
@@ -463,7 +480,21 @@ See also the [text guidelines][text].
  *  <a href="#li-4b3adb1b" id="li-4b3adb1b" name="li-4b3adb1b">§</a>
     Name `context.Context` helper functions that return values from the context
     `FooFromContext` and the ones that return a new contest with new values,
-    `WithFoo`.
+    `ContextWithFoo` or `WithFoo`.  Just like in the standard library, the
+    parent context should be called `parent`.
+
+    ```go
+    // ContextWithFoo returns a copy of the parent context with the value of `f`
+    // attached to it.
+    func ContextWithFoo(parent context.Context, f Foo) (ctx context.Context) {
+            // …
+    }
+
+    // FooFromContext returns the Foo attached to the context.
+    func FooFromContext(parent context.Context) (f Foo, ok bool) {
+            // …
+    }
+    ```
 
  *  <a href="#li-17e872ff" id="li-17e872ff" name="li-17e872ff">§</a>
     Name deferred errors (e.g. when closing something) `derr`.
