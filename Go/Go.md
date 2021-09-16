@@ -243,6 +243,25 @@ See also the [text guidelines][text].
 
 ##  <a href="#formatting" id="formatting" name="formatting">Formatting</a>
 
+ *  <a href="#li-9f87a6e3" id="li-9f87a6e3" name="li-9f87a6e3">§</a>
+    Consider putting empty lines between documented struct fields and interface
+    methods to improve readability:
+
+    ```go
+    // FooConfig is the configuration for a single foo.
+    type FooConfig struct {
+            // ID is the unique ID of foo.
+            ID FooID
+
+            // Name is the human-readable name of this foo.
+            Name string
+
+            // Timeout is the timeout used for all frobulation operations
+            // performed by this foo.
+            Timeout time.Duration
+    }
+    ```
+
  *  <a href="#li-018bb84c" id="li-018bb84c" name="li-018bb84c">§</a>
     Decorate `break`, `continue`, `return`, and other terminating statements
     with empty lines unless it's the only statement in that block.
@@ -346,6 +365,18 @@ See also the [text guidelines][text].
             return err
     }
     defer func() { processError(f.Close()) }()
+    ```
+
+ *  <a href="#li-a54ab45b" id="li-a54ab45b" name="li-a54ab45b">§</a>
+    Split numbers with more than four (**4**) digits into triplets using
+    underscores:
+
+    ```go
+    const (
+            max8  = 255
+            max16 = 65_535
+            max32 = 4_294_967_295
+    )
     ```
 
  *  <a href="#li-f2156af9" id="li-f2156af9" name="li-f2156af9">§</a>
