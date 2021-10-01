@@ -37,7 +37,7 @@ The rules are mostly sorted in the alphabetical order.
     // Bad!  Will duplicate the file name.
     f, err := os.Open(fileName)
     if err != nil {
-            return fmt.Errorf("opening %q: %w", fileName, err)
+        return fmt.Errorf("opening %q: %w", fileName, err)
     }
     ```
 
@@ -68,7 +68,7 @@ The rules are mostly sorted in the alphabetical order.
 
     ```go
     if s == "" {
-            // …
+        // …
     }
     ```
 
@@ -76,7 +76,7 @@ The rules are mostly sorted in the alphabetical order.
 
     ```go
     if len(s) > 0 {
-            c := s[0]
+        c := s[0]
     }
     ```
 
@@ -92,23 +92,23 @@ The rules are mostly sorted in the alphabetical order.
     ```go
     // Bad!  Function outer expects inner to mutate logEntry.
     func outer(ctx context.Context, /* … */) {
-            logEntry := &LogEntry{}
-            ctx = contextWithLogEntry(ctx, logEntry)
+        logEntry := &LogEntry{}
+        ctx = contextWithLogEntry(ctx, logEntry)
 
-            inner(ctx, /* … */)
+        inner(ctx, /* … */)
 
-            if logEntry.Success {
-                    // …
-            }
+        if logEntry.Success {
+            // …
+        }
     }
 
     // Bad!  Function inner mutates logEntry just so that outer could receive
     // that change.
     func inner(ctx context.Context, /* … */) {
-            logEntry := logEntryFromContext(ctx)
-            logEntry.Success = true
+        logEntry := logEntryFromContext(ctx)
+        logEntry.Success = true
 
-            // …
+        // …
     }
     ```
 
@@ -169,25 +169,36 @@ The rules are mostly sorted in the alphabetical order.
     Program code lines should not be longer than one hundred (**100**) columns.
     For comments, see the [text guidelines][text].
 
+    Don't forget to also [set the tab width][tab] in your editor's settings.
+
  *  <a href="#li-4bfdabf9" id="li-4bfdabf9" name="li-4bfdabf9">§</a>
     Use linters.  `make go-lint`, if the project has one.  A minimum of
     `go vet`, `errcheck`, and staticcheck if the project does not.
+
+ *  <a href="#li-6d1104bd" id="li-6d1104bd" name="li-6d1104bd">§</a>
+    Use `panic` **only** to indicate critical assertion failures.  **Do not**
+    use panics for normal error handling.
 
  *  <a href="#li-4c8cc15a" id="li-4c8cc15a" name="li-4c8cc15a">§</a>
     Write logs and error messages in lowercase only to make it easier to `grep`
     logs and error messages without using the `-i` flag.
 
  *  <a href="#li-8c55e31a" id="li-8c55e31a" name="li-8c55e31a">§</a>
-    Write static interface type checks like this, including the comment:
+    Write static interface type checks like this, including the standard
+    comment:
 
     ```go
     // type check
     var _ ifaceType = (*implType)(nil)
     ```
 
-[struct]:           https://medium.com/@cep21/what-accept-interfaces-return-structs-means-in-go-2fe879e25ee8
+    Put them right before the declaration of the first method implementing the
+    interface in question.
+
 [constant errors]:  https://dave.cheney.net/2016/04/07/constant-errors
 [staticcheck-911]:  https://github.com/dominikh/go-tools/issues/911
+[struct]:           https://medium.com/@cep21/what-accept-interfaces-return-structs-means-in-go-2fe879e25ee8
+[tab]:              Text.md#li-84467c92
 [text]:             Text.md
 
 
@@ -226,7 +237,7 @@ See also the [text guidelines][text].
     ```go
     // Foo implements the Fooer interface for *foo.
     func (f *foo) Foo() {
-            // …
+        // …
     }
     ```
 
@@ -235,7 +246,7 @@ See also the [text guidelines][text].
     ```go
     // Unwrap implements the hidden wrapper interface for *fooError.
     func (err *fooError) Unwrap() (unwrapped error) {
-            // …
+        // …
     }
     ```
 
@@ -250,15 +261,15 @@ See also the [text guidelines][text].
     ```go
     // FooConfig is the configuration for a single foo.
     type FooConfig struct {
-            // ID is the unique ID of foo.
-            ID FooID
+        // ID is the unique ID of foo.
+        ID FooID
 
-            // Name is the human-readable name of this foo.
-            Name string
+        // Name is the human-readable name of this foo.
+        Name string
 
-            // Timeout is the timeout used for all frobulation operations
-            // performed by this foo.
-            Timeout time.Duration
+        // Timeout is the timeout used for all frobulation operations
+        // performed by this foo.
+        Timeout time.Duration
     }
     ```
 
@@ -278,7 +289,7 @@ See also the [text guidelines][text].
 
     ```go
     func f(a, b, c T) {
-            // …
+        // …
     }
     ```
 
@@ -290,19 +301,19 @@ See also the [text guidelines][text].
 
     ```go
     func functionWithALongName(
-            firstArgumentWithALongName typeWithALongName,
-            secondArgumentWithALongName otherTypeWithALongName,
-            thirdArgumentWithALongName thirdTypeWithALongName,
+        firstArgumentWithALongName typeWithALongName,
+        secondArgumentWithALongName otherTypeWithALongName,
+        thirdArgumentWithALongName thirdTypeWithALongName,
     ) {
-            // …
+        // …
     }
     ```
 
     ```go
     err := functionWithALongName(
-            firstArgumentWithALongName,
-            secondArgumentWithALongName,
-            thirdArgumentWithALongName,
+        firstArgumentWithALongName,
+        secondArgumentWithALongName,
+        thirdArgumentWithALongName,
     )
     ```
 
@@ -310,8 +321,8 @@ See also the [text guidelines][text].
 
     ```go
     err := functionWithALongName(arg, structType{
-            field1: val1,
-            field2: val2,
+        field1: val1,
+        field2: val2,
     })
     ```
 
@@ -320,17 +331,17 @@ See also the [text guidelines][text].
     ```go
     // Bad!
     func functionWithALongName(firstArgumentWithALongName typeWithALongName,
-            secondArgumentWithALongName otherTypeWithALongName,
-            thirdArgumentWithALongName thirdTypeWithALongName) {
-            // …
+        secondArgumentWithALongName otherTypeWithALongName,
+        thirdArgumentWithALongName thirdTypeWithALongName) {
+        // …
     }
     ```
 
     ```go
     // Bad!
     err := functionWithALongName(firstArgumentWithALongName,
-            secondArgumentWithALongName,
-            thirdArgumentWithALongName,
+        secondArgumentWithALongName,
+        thirdArgumentWithALongName,
     )
     ```
 
@@ -362,7 +373,7 @@ See also the [text guidelines][text].
     ```go
     f, err := os.Open(fileName)
     if err != nil {
-            return err
+        return err
     }
     defer func() { processError(f.Close()) }()
     ```
@@ -373,9 +384,9 @@ See also the [text guidelines][text].
 
     ```go
     const (
-            max8  = 255
-            max16 = 65_535
-            max32 = 4_294_967_295
+        max8  = 255
+        max16 = 65_535
+        max32 = 4_294_967_295
     )
     ```
 
@@ -385,15 +396,15 @@ See also the [text guidelines][text].
 
     ```go
     if a == b {
-            // …
+        // …
     }
 
     for i := 0; i < N; i++ {
-            // …
+        // …
     }
 
     switch x {
-            // …
+        // …
     }
     ```
 
@@ -402,13 +413,13 @@ See also the [text guidelines][text].
     ```go
     // Bad!
     if a == b {
-            // …
+        // …
     }
     for i := 0; i < N; i++ {
-            // …
+        // …
     }
     switch x {
-            // …
+        // …
     }
     ```
 
@@ -425,9 +436,9 @@ See also the [text guidelines][text].
 
     ```go
     func functionWithALongName(
-            argumentWithALongName typeWithALongName,
+        argumentWithALongName typeWithALongName,
     ) (returnValueWithALongName typeWithALongName, err error) {
-            // …
+        // …
     }
     ```
 
@@ -436,10 +447,10 @@ See also the [text guidelines][text].
     ```go
     // Bad!
     func functionWithALongName(argumentWithALongName typeWithALongName) (
-            returnValueWithALongName typeWithALongName,
-            err error,
+        returnValueWithALongName typeWithALongName,
+        err error,
     ) {
-            // …
+        // …
     }
     ```
 
@@ -449,14 +460,14 @@ See also the [text guidelines][text].
     ```go
     switch n {
     case
-            longValueName1,
-            longValueName2,
-            longValueName3,
-            longValueName4,
-            longValueName5:
-            return true
+        longValueName1,
+        longValueName2,
+        longValueName3,
+        longValueName4,
+        longValueName5:
+        return true
     default:
-            return false
+        return false
     }
     ```
 
@@ -465,14 +476,14 @@ See also the [text guidelines][text].
 
     ```go
     ts := []T{{
-            Field: Value0,
-            // …
+        Field: Value0,
+        // …
     }, {
-            Field: Value1,
-            // …
+        Field: Value1,
+        // …
     }, {
-            Field: Value2,
-            // …
+        Field: Value2,
+        // …
     }}
     ```
 
@@ -518,12 +529,12 @@ See also the [text guidelines][text].
     // ContextWithFoo returns a copy of the parent context with the value of `f`
     // attached to it.
     func ContextWithFoo(parent context.Context, f Foo) (ctx context.Context) {
-            // …
+        // …
     }
 
     // FooFromContext returns the Foo attached to the context.
     func FooFromContext(parent context.Context) (f Foo, ok bool) {
-            // …
+        // …
     }
     ```
 
@@ -535,7 +546,7 @@ See also the [text guidelines][text].
 
     ```go
     type Frobulator interface {
-            Frobulate(f Foo, b Bar) (r Result, err error)
+        Frobulate(f Foo, b Bar) (r Result, err error)
     }
     ```
 
@@ -544,7 +555,7 @@ See also the [text guidelines][text].
 
     ```go
     v.onSuccess = func(_ int, msg string) {
-            // …
+        // …
     }
     ```
 
@@ -561,7 +572,7 @@ See also the [text guidelines][text].
     package foo
 
     type Client struct {
-            // …
+        // …
     }
     ```
 
@@ -575,7 +586,7 @@ See also the [text guidelines][text].
     // …
 
     type ClientsWithCache struct {
-            // …
+        // …
     }
     ```
 

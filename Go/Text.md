@@ -50,9 +50,24 @@ The rules are mostly sorted in the alphabetical order.
     Set your editor to always end all your files with a newline to make sure
     that Unix tools [work correctly][nl].
 
+ *  <a href="#li-84467c92" id="li-84467c92" name="li-84467c92">§</a>
+    Set your editor to consider one tab to be four (**4**) columns wide.  This
+    is the default in most editors, and it is also a common preference among
+    developers.
+
  *  <a href="#li-b281efe6" id="li-b281efe6" name="li-b281efe6">§</a>
     Start sentences with a capital letter, unless the first word is a reference
     to a variable name that starts with a lowercase letter.
+
+ *  <a href="#li-80ccb701" id="li-80ccb701" name="li-80ccb701">§</a>
+    Strive to not leave any space on the right side and properly justify the
+    text.  For example, **do not** do this:
+
+    ```none
+    This text is way too
+    narrow and should be
+    expanded.
+    ```
 
  *  <a href="#li-5e786fd3" id="li-5e786fd3" name="li-5e786fd3">§</a>
     Text should wrap at eighty (**80**) columns to be more readable, to use
@@ -60,6 +75,8 @@ The rules are mostly sorted in the alphabetical order.
     wrapping.
 
     The only exception are long hyperlinks.
+
+    Don't forget to also [set the tab width][tab] in your editor's settings.
 
  *  <a href="#li-56e8ee2f" id="li-56e8ee2f" name="li-56e8ee2f">§</a>
     Use U.S. English, as it is the most widely used variety of English in the
@@ -85,4 +102,5 @@ The rules are mostly sorted in the alphabetical order.
     // TODO(usr1, usr2): Fix the frobulation issue.
     ```
 
-[nl]: https://stackoverflow.com/q/729692/1892060
+[nl]:  https://stackoverflow.com/q/729692/1892060
+[tab]: #li-84467c92
