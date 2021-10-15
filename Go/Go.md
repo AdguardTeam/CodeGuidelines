@@ -103,7 +103,7 @@ The rules are mostly sorted in the alphabetical order.
         check(err)
         defer r.close()
 
-        return process(r)
+        return decode(r)
     }
     ```
 
