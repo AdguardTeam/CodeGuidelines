@@ -63,6 +63,50 @@ The rules are mostly sorted in the alphabetical order.
  *  <a href="#li-c9d7fde7" id="li-c9d7fde7" name="li-c9d7fde7">§</a>
     Avoid package `reflect` unless absolutely necessary.
 
+ *  <a href="#li-c85dd96a" id="li-c85dd96a" name="li-c85dd96a">§</a>
+    Be aware of and strive to shorten resource scopes.
+
+    For example, if you have a long function that makes an HTTP request and
+    defers the close of the body at the beginning and then does more stuff, it's
+    better to factor out the HTTP request and the response parsing into
+    a separate method.  Same goes for mutexes.
+
+    That is, do **not** do this:
+
+    ```go
+    // Bad!  Resource r is only closed at the end of the very long function.
+    func Foo() (err error) {
+        r, err := open()
+        check(err)
+        defer r.close()
+
+        v, err := decode(r)
+        check(err)
+
+        // Lots of slow stuff with v.  r is only closed once Foo exits.
+    }
+    ```
+
+    Do this instead:
+
+    ```go
+    // Good, r is closed after loadV returns.
+    func Foo() (err error) {
+        v, err := loadV()
+        check(err)
+
+        // Lots of slow stuff with v.
+    }
+
+    func loadV() (v *V, err error) {
+        r, err := open()
+        check(err)
+        defer r.close()
+
+        return process(r)
+    }
+    ```
+
  *  <a href="#li-6f8bd178" id="li-6f8bd178" name="li-6f8bd178">§</a>
     Check against empty strings like this:
 
@@ -494,6 +538,7 @@ See also the [text guidelines][text].
 [ret]:   #li-d9b8f5a8
 
 
+
 ##  <a href="#naming" id="naming" name="naming">Naming</a>
 
  *  <a href="#li-58922472" id="li-58922472" name="li-58922472">§</a>
@@ -507,6 +552,19 @@ See also the [text guidelines][text].
  *  <a href="#li-5a2d4941" id="li-5a2d4941" name="li-5a2d4941">§</a>
     For brands or words with more than 1 capital letter, lowercase all letters:
     `githubToken`, **not** `gitHubToken`.
+
+ *  <a href="#li-177c14d4" id="li-177c14d4" name="li-177c14d4">§</a>
+    Methods that convert types for external data, such as configuration
+    structures and response structures, into internal types should be called
+    `toInternal`:
+
+    ```go
+    // toInternal converts a user object from the configuration file into
+    // a *User.
+    func (u *confUser) toInternal() (user *User) {
+        // …
+    }
+    ```
 
  *  <a href="#li-a3a30716" id="li-a3a30716" name="li-a3a30716">§</a>
     Name benchmarks and tests using the same convention as examples.  For
@@ -593,6 +651,31 @@ See also the [text guidelines][text].
 
 
 ##  <a href="#testing" id="testing" name="testing">Testing</a>
+
+ *  <a href="#li-4f4ff827" id="li-4f4ff827" name="li-4f4ff827">§</a>
+    If you write a fake implementation of an interface for a test, prefer to 
+    write it using callbacks:
+
+    ```go
+    // FakeReader …
+    type FakeReader struct {
+        OnRead func(b []byte) (n int, err error)
+    }
+
+    // Read implements the io.Reader interface for *FakeReader.
+    func (r *FakeReader) Read(b []byte) (n int, err error) {
+        return r.OnRead(b)
+    }
+    ```
+
+    If the method must not be called in this particular test, place a single
+    `panic("not implemented")` as its body:
+
+    ```go
+    r := &FakeReader{
+        OnRead: func(b []byte) (n int, err error) { panic("not implemented") },
+    }
+    ```
 
  *  <a href="#li-a52e192a" id="li-a52e192a" name="li-a52e192a">§</a>
     Put all tests into a separate [test package][tpkg].
