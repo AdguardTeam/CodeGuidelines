@@ -30,7 +30,7 @@ The rules are mostly sorted in the alphabetical order.
 ##  <a href="#code" id="code" name="code">Code</a>
 
  *  <a href="#li-651fcd50" id="li-651fcd50" name="li-651fcd50">§</a>
-    Add context to errors but avoid duplication.  For example, `os.Open` alwyas
+    Add context to errors but avoid duplication.  For example, `os.Open` always
     adds the path to its error, so this is redundant:
 
     ```go
@@ -173,7 +173,7 @@ The rules are mostly sorted in the alphabetical order.
     necessary.
 
  *  <a href="#li-b34a7563" id="li-b34a7563" name="li-b34a7563">§</a>
-    In templates, put spaces between the delimeters (`{{` and `}}` by default)
+    In templates, put spaces between the delimiters (`{{` and `}}` by default)
     and the content, because when the minus sign is used to remove whitespace,
     it's an error to omit these spaces.
 
@@ -292,6 +292,32 @@ See also the [text guidelines][text].
     func (err *fooError) Unwrap() (unwrapped error) {
         // …
     }
+    ```
+
+ *  <a href="#li-dca638fe" id="li-dca638fe" name="li-dca638fe">§</a>
+    Write names of RFCs without a hyphen and don't put a newline between the
+    letters and the numbers.  Godoc and pkg.go.dev both will add a link to the
+    RFC, but only if the RFC is spelled that way.
+
+    So, do this:
+
+    ```go
+    // toTime parses an RFC 3339 timestamp.
+    ```
+
+    and **not** this:
+
+    ```go
+    // Bad!  A hyphen is used.
+
+    // toTime parses an RFC-3339 timestamp.
+    ```
+
+    ```go
+    // Bad!  A newline before the number.
+
+    // toTime parses and also uses an optimized validation technique on an RFC
+    // 3339 timestamp.
     ```
 
 
