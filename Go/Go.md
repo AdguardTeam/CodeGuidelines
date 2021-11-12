@@ -107,6 +107,47 @@ The rules are mostly sorted in the alphabetical order.
     }
     ```
 
+ *  <a href="#li-d027c6cd" id="li-d027c6cd" name="li-d027c6cd">§</a>
+    Be aware of structure alignment as well as the number of [pointer
+    bytes][ptr].  Exceptions could be made if a suboptimal alignment produces
+    significantly better readability.
+
+    ```go
+    // Bad!  Lots of padding between the uint64s and bools.  Pointers are at the
+    // end of the structure.
+    type bad struct {
+        a uint64
+        b bool
+        c uint64
+        d bool
+        e uint64
+        f bool
+        g uint64
+        h bool
+
+        y *otherType
+        z *otherType
+    }
+
+    // Good.  The padding is minimized, and the pointers are closer to the top.
+    type good struct {
+        y *otherType
+        z *otherType
+
+        g uint64
+        e uint64
+        c uint64
+        a uint64
+
+        h bool
+        f bool
+        d bool
+        b bool
+    }
+    ```
+
+    Use the [`fieldalignment`][fa] analyzer when unsure.
+
  *  <a href="#li-6f8bd178" id="li-6f8bd178" name="li-6f8bd178">§</a>
     Check against empty strings like this:
 
@@ -240,6 +281,8 @@ The rules are mostly sorted in the alphabetical order.
     interface in question.
 
 [constant errors]:  https://dave.cheney.net/2016/04/07/constant-errors
+[fa]:               https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment/cmd/fieldalignment
+[ptr]:              https://github.com/golang/go/issues/44877#issuecomment-794565908
 [staticcheck-911]:  https://github.com/dominikh/go-tools/issues/911
 [struct]:           https://medium.com/@cep21/what-accept-interfaces-return-structs-means-in-go-2fe879e25ee8
 [tab]:              Text.md#li-84467c92
