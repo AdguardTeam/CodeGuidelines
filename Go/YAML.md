@@ -9,8 +9,7 @@
     All strings, including keys, must be quoted.  Reason: the “[NO-rway Law]”.
 
  *  <a href="#li-2a425f43" id="li-2a425f43" name="li-2a425f43">§</a>
-    Indent with two (**2**) spaces.  YAML documents can get pretty
-    deeply-nested.
+    Indent with four (**4**) spaces.
 
  *  <a href="#li-231fdb57" id="li-231fdb57" name="li-231fdb57">§</a>
     No extra indentation in multiline arrays:
