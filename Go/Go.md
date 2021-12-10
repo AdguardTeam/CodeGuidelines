@@ -41,6 +41,22 @@ The rules are mostly sorted in the alphabetical order.
     }
     ```
 
+    If a function returns enough context, or a deferred helper is used, document
+    that:
+
+    ```go
+    err = f()
+    if err != nil {
+        // Don't wrap the error, since f provides enough context.
+        return err
+    }
+    ```
+
+ *  <a href="#li-cb105c8c" id="li-cb105c8c" name="li-cb105c8c">§</a>
+    Avoid `break` and `continue` with labels.  Most of the time the code can be
+    rewritten without them, and most of the time the resulting new code is also
+    clearer.
+
  *  <a href="#li-5305b436" id="li-5305b436" name="li-5305b436">§</a>
     Always `recover` from panics in new goroutines.  Preferably in the very
     first statement.  If all you want there is a log message, use `log.OnPanic`.
@@ -61,7 +77,8 @@ The rules are mostly sorted in the alphabetical order.
     for example when checking the type of an error using `errors.As`.
 
  *  <a href="#li-c9d7fde7" id="li-c9d7fde7" name="li-c9d7fde7">§</a>
-    Avoid package `reflect` unless absolutely necessary.
+    Avoid packages `reflect` and `unsafe` unless absolutely necessary.  Always
+    provide a comment explaining why you are using it.
 
  *  <a href="#li-c85dd96a" id="li-c85dd96a" name="li-c85dd96a">§</a>
     Be aware of and strive to shorten resource scopes.
