@@ -13,6 +13,7 @@ The rules are mostly sorted in the alphabetical order.
 
  *  [Code](#code)
  *  [Commenting](#commenting)
+ *  [Error Handling](#errors)
  *  [Formatting](#formatting)
  *  [Naming](#naming)
  *  [Testing](#testing)
@@ -28,29 +29,6 @@ The rules are mostly sorted in the alphabetical order.
 
 
 ##  <a href="#code" id="code" name="code">Code</a>
-
- *  <a href="#li-651fcd50" id="li-651fcd50" name="li-651fcd50">§</a>
-    Add context to errors but avoid duplication.  For example, `os.Open` always
-    adds the path to its error, so this is redundant:
-
-    ```go
-    // Bad!  Will duplicate the file name.
-    f, err := os.Open(fileName)
-    if err != nil {
-        return fmt.Errorf("opening %q: %w", fileName, err)
-    }
-    ```
-
-    If a function returns enough context, or a deferred helper is used, document
-    that:
-
-    ```go
-    err = f()
-    if err != nil {
-        // Don't wrap the error, since f provides enough context.
-        return err
-    }
-    ```
 
  *  <a href="#li-cb105c8c" id="li-cb105c8c" name="li-cb105c8c">§</a>
     Avoid `break` and `continue` with labels.  Most of the time the code can be
@@ -71,6 +49,10 @@ The rules are mostly sorted in the alphabetical order.
 
  *  <a href="#li-928170b7" id="li-928170b7" name="li-928170b7">§</a>
     Avoid `init` and use explicit initialization functions instead.
+
+ *  <a href="#li-fa33e482" id="li-fa33e482" name="li-fa33e482">§</a>
+    Avoid lazy initialization.  Constructors should validate their arguments and
+    return meaningful errors.
 
  *  <a href="#li-6ae6bc94" id="li-6ae6bc94" name="li-6ae6bc94">§</a>
     Avoid `new`, especially with structs, unless a temporary value is needed,
@@ -182,10 +164,6 @@ The rules are mostly sorted in the alphabetical order.
     }
     ```
 
- *  <a href="#li-fa33e482" id="li-fa33e482" name="li-fa33e482">§</a>
-    Constructors should validate their arguments and return meaningful errors.
-    As a corollary, avoid lazy initialization.
-
  *  <a href="#li-eaba198b" id="li-eaba198b" name="li-eaba198b">§</a>
     Context values should be considered immutable.  Do not use modifications
     of context values as a means of communicating something up the stack.  That
@@ -276,10 +254,6 @@ The rules are mostly sorted in the alphabetical order.
  *  <a href="#li-4bfdabf9" id="li-4bfdabf9" name="li-4bfdabf9">§</a>
     Use linters.  `make go-lint`, if the project has one.  A minimum of
     `go vet`, `errcheck`, and staticcheck if the project does not.
-
- *  <a href="#li-6d1104bd" id="li-6d1104bd" name="li-6d1104bd">§</a>
-    Use `panic` **only** to indicate critical assertion failures.  **Do not**
-    use panics for normal error handling.
 
  *  <a href="#li-4c8cc15a" id="li-4c8cc15a" name="li-4c8cc15a">§</a>
     Write logs and error messages in lowercase only to make it easier to `grep`
@@ -379,6 +353,77 @@ See also the [text guidelines][text].
     // toTime parses and also uses an optimized validation technique on an RFC
     // 3339 timestamp.
     ```
+
+
+
+##  <a href="#errors" id="errors" name="errors">Error Handling</a>
+
+ *  <a href="#li-651fcd50" id="li-651fcd50" name="li-651fcd50">§</a>
+    Add context to errors but avoid duplication.  For example, `os.Open` always
+    adds the path to its error, so this is redundant:
+
+    ```go
+    // Bad!  Will duplicate the file name.
+    f, err := os.Open(fileName)
+    if err != nil {
+        return fmt.Errorf("opening %q: %w", fileName, err)
+    }
+    ```
+
+    If a function returns enough context, or a deferred helper is used, document
+    that.  Prefer to use a standard comment across a project.  For example:
+
+    ```go
+    err = f()
+    if err != nil {
+        // Don't wrap the error, because it's informative enough as is.
+        return err
+    }
+    ```
+
+ *  <a href="#li-17e872ff" id="li-17e872ff" name="li-17e872ff">§</a>
+    Avoid having multiple errors in a function.  In situations when it's not
+    feasible, use single-letter prefixes.  For example, `cerr` for errors from
+    `Close()` or `terr` for subtest errors.
+
+ *  <a href="#li-9e172a2e" id="li-9e172a2e" name="li-9e172a2e">§</a>
+    Avoid using the word `error` inside error messages.
+
+    ```go
+    // BAD!
+    err = foo()
+    if err != nil {
+        return fmt.Errorf("error while calling foo: %w", err)
+    }
+    ```
+
+    Just provide the action instead:
+
+    ```go
+    // Good.
+    err = foo()
+    if err != nil {
+        return fmt.Errorf("performing foo: %w", err)
+    }
+    ```
+
+ *  <a href="#li-31fae402" id="li-31fae402" name="li-31fae402">§</a>
+    Parsing functions should include the invalid input into the error message,
+    unless the input is too big.
+
+ *  <a href="#li-be5ea7a7" id="li-be5ea7a7" name="li-be5ea7a7">§</a>
+    Use only lowercase unless you have to reference an identifier in code or the
+    project has its own conventions regarding uppercase letters.
+
+ *  <a href="#li-6d1104bd" id="li-6d1104bd" name="li-6d1104bd">§</a>
+    Use `panic` **only** to indicate critical assertion failures.  **Do not**
+    use panics for normal error handling.
+
+ *  <a href="#li-f6d13b11" id="li-f6d13b11" name="li-f6d13b11">§</a>
+    Use utilities from the [`github.com/AdguardTeam/golibs/testutil`][testutil]
+    package when necessary.
+
+[testutil]: https://pkg.go.dev/github.com/AdguardTeam/golibs/testutil
 
 
 
@@ -681,9 +726,6 @@ See also the [text guidelines][text].
         // …
     }
     ```
-
- *  <a href="#li-17e872ff" id="li-17e872ff" name="li-17e872ff">§</a>
-    Name deferred errors (e.g. when closing something) `derr`.
 
  *  <a href="#li-ac62f22b" id="li-ac62f22b" name="li-ac62f22b">§</a>
     Name parameters in interface definitions:
