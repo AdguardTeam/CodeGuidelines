@@ -231,9 +231,18 @@ The rules are mostly sorted in the alphabetical order.
     and `Foo.UnmarshalText` correspondingly and not the other way around.
 
  *  <a href="#li-edd678a8" id="li-edd678a8" name="li-edd678a8">§</a>
-    Prefer to define methods on pointer receivers, unless the type is small or
-    a non-pointer receiver is required, for example `MarshalFoo` methods (see
-    [`staticcheck` issue 911][staticcheck-911]).
+    Prefer to use pointers to structs in function arguments, including method
+    receivers, unless there is a reason to do the opposite.  Among valid reasons
+    are:
+
+     *  the struct is small, which typically means less than a few machine
+        words;
+     *  the struct is readonly, like `netip.Addr` or `time.Time`;
+     *  the struct is immediately used by an external API that requires a
+        non-pointer struct;
+     *  the method implements a `FooMarshaler` kind of interface, and so
+        a non-pointer receiver is required (see [`staticcheck` issue
+        911][staticcheck-911]).
 
  *  <a href="#li-c178ad65" id="li-c178ad65" name="li-c178ad65">§</a>
     Prefer to [return structs and accept interfaces][struct].
@@ -383,8 +392,8 @@ See also the [text guidelines][text].
 
  *  <a href="#li-17e872ff" id="li-17e872ff" name="li-17e872ff">§</a>
     Avoid having multiple errors in a function.  In situations when it's not
-    feasible, use single-letter prefixes.  For example, `cerr` for errors from
-    `Close()` or `terr` for subtest errors.
+    feasible, use meaningful names.  For example, `closeErr` for errors
+    from `Close()` or `testErr` for subtest errors.
 
  *  <a href="#li-9e172a2e" id="li-9e172a2e" name="li-9e172a2e">§</a>
     Avoid using the word `error` inside error messages.
@@ -746,7 +755,13 @@ See also the [text guidelines][text].
     ```
 
  *  <a href="#li-da463e1c" id="li-da463e1c" name="li-da463e1c">§</a>
-    Use named returns to improve readability of function signatures.
+    Use named returns to improve readability of function signatures:
+
+    ```go
+    func split(data []*datum) (less, greater []*datum) {
+        // …
+    }
+    ```
 
  *  <a href="#li-c2c377e4" id="li-c2c377e4" name="li-c2c377e4">§</a>
     When naming a file which defines an entity, use singular nouns, unless the
@@ -806,7 +821,12 @@ See also the [text guidelines][text].
     ```
 
  *  <a href="#li-a52e192a" id="li-a52e192a" name="li-a52e192a">§</a>
-    Put all tests into a separate [test package][tpkg].
+    Prefer to put all tests into a separate [test package][tpkg].
+
+ *  <a href="#li-b4f670ce" id="li-b4f670ce" name="li-b4f670ce">§</a>
+    Strive to make the test suite finish quickly.  If you have long-running
+    integration test or fuzzes, prefer to skip them unless an environment
+    variable is set.
 
  *  <a href="#li-9124bf62" id="li-9124bf62" name="li-9124bf62">§</a>
     Use `assert.NoError` and `require.NoError` instead of `assert.Nil` and

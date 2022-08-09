@@ -13,6 +13,21 @@ The rules are mostly sorted in the alphabetical order.
     Avoid overly technical and markup-ey comments.  Write comments for people,
     with full sentences and proper punctuation.
 
+ *  <a href="#li-195be0d8 " id="li-195be0d8 " name="li-195be0d8>§</a>
+    Avoid duplication of words, even if it's grammatically correct.  For
+    example, avoid:
+
+    ```none
+    # Bad!  The duplication in “that that” impedes reading.
+    It isn't obvious that that will not cause issues.
+    ```
+
+    instead, write something like:
+
+    ```none
+    It isn't obvious that the code will not cause issues.
+    ```
+
  *  <a href="#li-2db43ebe" id="li-2db43ebe" name="li-2db43ebe">§</a>
     Capitalize every letter in a header or title.  So, a header should be
     something like this:
@@ -26,6 +41,10 @@ The rules are mostly sorted in the alphabetical order.
     ```none
     Using the New API
     ```
+
+ *  <a href="#li-a8c8a641" id="li-a8c8a641" name="li-a8c8a641">§</a>
+    Changelogs should follow the [Keep a Changelog format][keep].  The
+    “Security” section may be put first.
 
  *  <a href="#li-658f569b" id="li-658f569b" name="li-658f569b">§</a>
     End sentences with appropriate punctuation.  Do not add full stops to
@@ -45,6 +64,14 @@ The rules are mostly sorted in the alphabetical order.
 
     This makes it easier to find them both during development and during code
     review.
+
+ *  <a href="#li-18ae73df" id="li-18ae73df" name="li-18ae73df">§</a>
+    RFC links should lead to the HTMLized version on `datatracker.ietf.org`.
+    For example:
+
+    ```none
+    https://datatracker.ietf.org/doc/html/rfc9000
+    ```
 
  *  <a href="#li-30aa3281" id="li-30aa3281" name="li-30aa3281">§</a>
     Set your editor to always end all your files with a newline to make sure
@@ -89,6 +116,7 @@ The rules are mostly sorted in the alphabetical order.
     Use the serial comma (a.k.a. Oxford comma) to improve comprehension,
     decrease ambiguity, and use a common standard.
 
+
  *  <a href="#li-2249ae11" id="li-2249ae11" name="li-2249ae11">§</a>
     Write todos like this:
 
@@ -102,5 +130,6 @@ The rules are mostly sorted in the alphabetical order.
     // TODO(usr1, usr2): Fix the frobulation issue.
     ```
 
-[nl]:  https://stackoverflow.com/q/729692/1892060
-[tab]: #li-84467c92
+[keep]: https://keepachangelog.com/en/1.0.0/
+[nl]:   https://stackoverflow.com/q/729692/1892060
+[tab]:  #li-84467c92

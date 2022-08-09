@@ -12,13 +12,22 @@
     Indent with four (**4**) spaces.
 
  *  <a href="#li-231fdb57" id="li-231fdb57" name="li-231fdb57">§</a>
-    No extra indentation in multiline arrays:
+    Multiline arrays should be formatted like this:
 
     ```yaml
     'values':
-    - 'value-1'
-    - 'value-2'
-    - 'value-3'
+      - 'value-1'
+      - 'value-2'
+      - 'value-3'
+    ```
+
+    This is acceptable:
+
+    ```yaml
+    'values':
+        - 'value-1'
+        - 'value-2'
+        - 'value-3'
     ```
 
  *  <a href="#li-2af45c9c" id="li-2af45c9c" name="li-2af45c9c">§</a>

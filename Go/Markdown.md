@@ -96,6 +96,13 @@
  *  <a href="#li-0f43f94c" id="li-0f43f94c" name="li-0f43f94c">§</a>
     Provide a table of content for large documents.
 
+ *  <a href="#li-099ae6d9" id="li-099ae6d9" name="li-099ae6d9">§</a>
+    Put punctuation inside the text in bold and italic:
+
+    ```md
+    This is **very important!**  You need to use *these;* those won't work.
+    ```
+
  *  <a href="#li-d7f5ff79" id="li-d7f5ff79" name="li-d7f5ff79">§</a>
     Use asterisks and not underscores for bold and italic.
 
@@ -104,15 +111,19 @@
     Markdown renderers that strip `id`s.
 
  *  <a href="#li-7b291978" id="li-7b291978" name="li-7b291978">§</a>
-    Use either link references or link destinations only.  Put all link
-    reference definitions at the end of the second-level block.
+    Use either link references or link destinations only, unless making a table
+    of contents.  Put all link reference definitions at the end of the
+    second-level block.
 
  *  <a href="#li-4e14be4c" id="li-4e14be4c" name="li-4e14be4c">§</a>
-    Use `none` as the info string for plain text or custom formats.
+    Use `none` as the info string for plain text or custom formats, such as
+    adblock rules.
 
  *  <a href="#li-6f29ab84" id="li-6f29ab84" name="li-6f29ab84">§</a>
-    Use the IDs that GitHub would generate in order for this to work both on
-    GitHub and most other Markdown renderers.
+    <del>Use the IDs that GitHub would generate in order for this to work both
+    on GitHub and most other Markdown renderers.</del>
+
+    This rule is obsoleted by the [rule about `names`][names].
 
  *  <a href="#li-fe52a949" id="li-fe52a949" name="li-fe52a949">§</a>
     When a code block interrupts a flow of a sentence, the line following the
@@ -127,3 +138,5 @@
 
     will print `hello from process #42`.
     ~~~
+
+[names]: #li-a825a6f4
