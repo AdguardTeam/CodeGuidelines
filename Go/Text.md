@@ -13,7 +13,7 @@ The rules are mostly sorted in the alphabetical order.
     Avoid overly technical and markup-ey comments.  Write comments for people,
     with full sentences and proper punctuation.
 
- *  <a href="#li-195be0d8 " id="li-195be0d8 " name="li-195be0d8>§</a>
+ *  <a href="#li-195be0d8" id="li-195be0d8" name="li-195be0d8">§</a>
     Avoid duplication of words, even if it's grammatically correct.  For
     example, avoid:
 

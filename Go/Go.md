@@ -237,7 +237,7 @@ The rules are mostly sorted in the alphabetical order.
 
      *  the struct is small, which typically means less than a few machine
         words;
-     *  the struct is readonly, like `netip.Addr` or `time.Time`;
+     *  the struct is read-only, like `netip.Addr` or `time.Time`;
      *  the struct is immediately used by an external API that requires a
         non-pointer struct;
      *  the method implements a `FooMarshaler` kind of interface, and so
