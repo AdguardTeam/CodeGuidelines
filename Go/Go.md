@@ -825,8 +825,9 @@ See also the [text guidelines][text].
 
  *  <a href="#li-b4f670ce" id="li-b4f670ce" name="li-b4f670ce">§</a>
     Strive to make the test suite finish quickly.  If you have long-running
-    integration test or fuzzes, prefer to skip them unless an environment
-    variable is set.
+    integration test or fuzzes, document them, put them into a separate Makefile
+    target, and include them into the CI pipeline, but not the main `make test`
+    target.
 
  *  <a href="#li-9124bf62" id="li-9124bf62" name="li-9124bf62">§</a>
     Use `assert.NoError` and `require.NoError` instead of `assert.Nil` and

@@ -12,7 +12,8 @@
     Indent with four (**4**) spaces.
 
  *  <a href="#li-231fdb57" id="li-231fdb57" name="li-231fdb57">§</a>
-    Multiline arrays should be formatted like this:
+    Multiline arrays should be formatted with two spaces, one hyphen, and one
+    space:
 
     ```yaml
     'values':
@@ -21,7 +22,8 @@
       - 'value-3'
     ```
 
-    This is acceptable:
+    although four spaces before a hyphen is acceptable, when a program formats a
+    document that way:
 
     ```yaml
     'values':
