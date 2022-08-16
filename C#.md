@@ -166,7 +166,7 @@ private void DoSomething()
 private void DoSomething()
 {
   // Good.
-  var pollIntervalMs = Convert.ToInt32(Console.ReadLine());
+  long pollIntervalMs = Convert.ToInt32(Console.ReadLine());
 }
 ```
 
@@ -233,7 +233,7 @@ private void EnsureCapacity(int min)
 {
   if (m_Items.Length < min) 
   {
-    var newCapacity = m_Items.Length == 0 ? m_DefaultCapacity : m_Items.Length * 2;
+    long newCapacity = m_Items.Length == 0 ? m_DefaultCapacity : m_Items.Length * 2;
     // Allow the list to grow to maximum possible capacity (~2G elements) before encountering overflow.
     // Note that this check works even when m_Items.Length overflowed thanks to the (uint) cast
     if ((uint)newCapacity > Array.MaxArrayLength) newCapacity = Array.MaxArrayLength;
@@ -260,6 +260,7 @@ Try to limit the length of method and code blocks by 50 lines so that they are n
 **Brackets and blocks**
 
 Open braces should always be at the beginning of the line after the statement that begins the block.
+
 
 ```C#
 // bad
@@ -311,19 +312,47 @@ if (foobar)
 }
 ```
 
+**Explicit type**
+
+Please use explicit type instead of `var` in all cases (may be except creating a new object with `new` keyword). It makes code cleaner and more understandable (especially while reading pull requests)
+
+
+```C#
+// bad
+var foo = GetSomething();
+ 
+// good
+FooDto foo = GetSomething();
+```
+
 **Ternary operators**
 
 Ternary operators are fine for clear-cut conditionals, but unacceptable for confusing choices.
 
 ```C#
 // bad
-var value = a && b ? 11 : a ? 10 : b ? 1 : 0;
+int value = a && b ? 11 : a ? 10 : b ? 1 : 0;
 
 // good
-var value = isSimple ? 11 : 1;
+int value = isSimple ? 11 : 1;
 ```
 
 Ternary expressions should never be nested because they just add to the confusion.
+
+**Expression-bodied members**
+
+Don't use [Expression-bodied members](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/expression-bodied-members) in all over the cases where it can be used. Despite of the fact `c#` supports such "sugar" and it looks more compactable, it makes code more complicated to read
+
+```C#
+// bad
+public bool Foo() => false;
+ 
+// good
+public bool Foo() 
+{
+  return false;
+}
+```
 
 **Centralize duplicate logic in utility functions**
 
@@ -495,3 +524,6 @@ Should be used to indicate that the application faced a significant problem and 
 
 ### VERBOSE
 Information that is diagnostically helpful to the developer.
+
+### TRACE
+Very detailed information used only in specific cases to find out the reasons of much-complicated issues
