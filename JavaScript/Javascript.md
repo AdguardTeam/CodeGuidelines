@@ -33,6 +33,8 @@ Heavily inspired by and partly composed of [Airbnb JavaScript Style Guide
 1. [Naming Conventions](#naming-conventions)
 1. [Accessors](#accessors)
 1. [Standard Library](#standard-library)
+1. [Sample eslint config](#sample-eslint-config)
+
 ## Types
 
 <a name="types--primitives"></a>
@@ -2951,5 +2953,10 @@ contains utilities that are functionally broken but remain for legacy reasons.
   Number.isFinite('2e3'); // false
   Number.isFinite(parseInt('2e3', 10)); // true
   ```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Sample eslint config
+Sample config can be found [here](./.eslintrc.js). Feel free to copy it and thoughtfully modify it to your needs.
 
 **[⬆ back to top](#table-of-contents)**
