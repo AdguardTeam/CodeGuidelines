@@ -366,7 +366,7 @@ Heavily inspired by and partly composed of [Airbnb JavaScript Style Guide
   ```
 
 <a name="strings--line-length"></a>
-- [6.2](#strings--line-length) Strings that cause the line to go over 100 characters should not be written across multiple lines using string concatenation.
+- [6.2](#strings--line-length) Strings that cause the line to go over 120 characters should not be written across multiple lines using string concatenation.
 
   > Why? Broken strings are painful to work with and make code less searchable.
 
@@ -2286,7 +2286,7 @@ Heavily inspired by and partly composed of [Airbnb JavaScript Style Guide
   ```
 
 <a name="whitespace--max-len"></a>
-- [18.13](#whitespace--max-len) Avoid having lines of code that are longer than 100 characters (including whitespace). Note: per [above](#strings--line-length), long strings are exempt from this rule, and should not be broken up. eslint: [`max-len`](https://eslint.org/docs/rules/max-len)
+- [18.13](#whitespace--max-len) Avoid having lines of code that are longer than 120 characters (including whitespace). Note: per [above](#strings--line-length), long strings are exempt from this rule, and should not be broken up. eslint: [`max-len`](https://eslint.org/docs/rules/max-len)
 
   > Why? This ensures readability and maintainability.
 
