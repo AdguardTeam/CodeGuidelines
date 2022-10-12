@@ -34,6 +34,7 @@ Heavily inspired by and partly composed of [Airbnb JavaScript Style Guide
 1. [Accessors](#accessors)
 1. [Standard Library](#standard-library)
 1. [Sample eslint config](#sample-eslint-config)
+1. [TypeScript](#typescript)
 
 ## Types
 
@@ -2958,5 +2959,48 @@ contains utilities that are functionally broken but remain for legacy reasons.
 
 ## Sample eslint config
 Sample config can be found [here](./.eslintrc.js). Feel free to copy it and thoughtfully modify it to your needs.
+
+**[⬆ back to top](#table-of-contents)**
+
+## TypeScript
+In TypeScript we use the same rules as in JavaScript, but we also have some additional guidelines that are specific to typescript.
+
+### Naming conventions
+- [25.1](#typescript--enum-naming-conventions) Use `PascalCase` enum names and enum properties.
+
+  ```typescript
+  // PascalCase
+  // bad
+  enum COLOR {
+    RED = 'RED',
+    GREEN = 'GREEN',
+    BLUE = 'BLUE',
+  }
+
+  // good
+  enum Color {
+    Red = 'Red', // PascalCase for values is optional
+    Green = 'Green',
+    Blue = 'Blue',
+  }
+
+  ```
+  Use singular names for enums.
+  ```typescript
+  // singular names
+  // bad
+  enum Colors {
+    Red = 'Red',
+    Green = 'Green',
+    Blue = 'Blue',
+  }
+
+  // good
+  enum Color {
+    Red = 'Red',
+    Green = 'Green',
+    Blue = 'Blue',
+  }
+  ```
 
 **[⬆ back to top](#table-of-contents)**
