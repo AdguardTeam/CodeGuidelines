@@ -113,7 +113,8 @@
  *  <a href="#li-7b291978" id="li-7b291978" name="li-7b291978">§</a>
     Use either link references or link destinations only, unless making a table
     of contents.  Put all link reference definitions at the end of the
-    second-level block.
+    second-level section or, if the second-level section is large, at the end of
+    a third-level one.
 
  *  <a href="#li-4e14be4c" id="li-4e14be4c" name="li-4e14be4c">§</a>
     Use `none` as the info string for plain text or custom formats, such as

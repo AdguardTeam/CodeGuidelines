@@ -264,6 +264,38 @@ The rules are mostly sorted in the alphabetical order.
     Use linters.  `make go-lint`, if the project has one.  A minimum of
     `go vet`, `errcheck`, and staticcheck if the project does not.
 
+ *  <a href="#li-29dc9ef0" id="li-29dc9ef0" name="li-29dc9ef0">§</a>
+    When returning an error from a function that also returns a non-nillable
+    type, for example a `time.Time`, a `time.Duration`, or a `netip.Addr`, spell
+    the empty value explicitly to show that the value is invalid.
+
+    So, do this:
+
+    ```go
+    func fooTime() (t time.Time, err error) {
+        err = bar()
+        if err != nil {
+            return time.Time{}, err
+        }
+
+        // …
+    }
+    ```
+
+    and **not** this:
+
+    ```go
+    func fooTime() (t time.Time, err error) {
+        err = bar()
+        if err != nil {
+            // Bad!  This could be read as t being valid, which it is not.
+            return t, err
+        }
+
+        // …
+    }
+    ```
+
  *  <a href="#li-4c8cc15a" id="li-4c8cc15a" name="li-4c8cc15a">§</a>
     Write logs and error messages in lowercase only to make it easier to `grep`
     logs and error messages without using the `-i` flag.
