@@ -1894,36 +1894,16 @@ Heavily inspired by and partly composed of [Airbnb JavaScript Style Guide
   ```
 
 <a name="comments--actionitems"></a>
-- [17.4](#comments--actionitems) Prefixing your comments with `FIXME` or `TODO` helps other developers quickly understand if you’re pointing out a problem that needs to be revisited, or if you’re suggesting a solution to the problem that needs to be implemented. These are different than regular comments because they are actionable. The actions are `FIXME: -- need to figure this out` or `TODO: -- need to implement`.
-
-<a name="comments--fixme"></a>
-- [17.5](#comments--fixme) Use `// FIXME:` to annotate problems.
-
+- [17.4](#comments--actionitems) Prefixing your comments with `FIXME` or `TODO` helps other developers quickly understand if you’re pointing out a problem that needs to be revisited, or if it should be fixed in the current pull-request.
   ```javascript
-  class Calculator extends Abacus {
-    constructor() {
-      super();
+  // author name is not required
+  // for future changes
+  // TODO(<author_name>): blablabla
 
-      // FIXME: shouldn’t use a global here
-      total = 0;
-    }
-  }
+  // for changes required in the current pull request
+  // FIXME(<author_name>): blablabla
   ```
-
-<a name="comments--todo"></a>
-- Use `// TODO:` to annotate solutions to problems.
-
-  ```javascript
-  class Calculator extends Abacus {
-    constructor() {
-      super();
-
-      // TODO: total should be configurable by an options param
-      this.total = 0;
-    }
-  }
-  ```
-- [17.6](#comments-jsdoc) To force right style of comments every eslint config should connect [eslint-plugin-jsdoc](https://github.com/gajus/eslint-plugin-jsdoc). With all recommended rules + jsdoc/require-file-overview
+- [17.6](#comments-jsdoc) To force right style of comments every eslint config should connect [eslint-plugin-jsdoc](https://github.com/gajus/eslint-plugin-jsdoc). With all recommended rules + `jsdoc/require-file-overview`
 
 **[⬆ back to top](#table-of-contents)**
 
