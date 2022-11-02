@@ -9,5 +9,5 @@
   * [Text, Including Comments](Go/Text.md)
   * [YAML](Go/YAML.md)
 * [Java](Java.md)
-* [Javascript](Javascript.md)
+* [Javascript](JavaScript/Javascript.md)
 * [PHP](PHP.md)
