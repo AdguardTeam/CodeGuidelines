@@ -2983,4 +2983,25 @@ In TypeScript we use the same rules as in JavaScript, but we also have some addi
   }
   ```
 
+### tsconfig flags
+- [26.1](#typescript--tsconfig-flags-) Use `strict: true` in your `tsconfig.json` file.
+
+  ```json
+  {
+    "compilerOptions": {
+      "strict": true
+    }
+  }
+  ```
+
+- [26.2](#typescript--tsconfig-flags-) Use `"noUncheckedIndexedAccess": true` in your `tsconfig.json` file. This is a good practice because it prevents you from accessing elements that don't exist. Read more about it [here](https://www.typescriptlang.org/tsconfig#noUncheckedIndexedAccess).
+
+  ```json
+  {
+    "compilerOptions": {
+      "noUncheckedIndexedAccess": true
+    }
+  }
+  ```
+
 **[⬆ back to top](#table-of-contents)**
