@@ -35,6 +35,7 @@ Heavily inspired by and partly composed of [Airbnb JavaScript Style Guide
 1. [Standard Library](#standard-library)
 1. [Sample eslint config](#sample-eslint-config)
 1. [TypeScript](#typescript)
+1. [Changelog](#changelog)
 
 ## Types
 
@@ -3005,3 +3006,6 @@ In TypeScript we use the same rules as in JavaScript, but we also have some addi
   ```
 
 **[⬆ back to top](#table-of-contents)**
+
+## Changelog
+For the changelog we follow [keep a changelog](https://keepachangelog.com/en/1.0.0/) guide.
