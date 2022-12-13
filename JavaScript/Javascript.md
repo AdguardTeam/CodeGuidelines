@@ -3009,3 +3009,5 @@ In TypeScript we use the same rules as in JavaScript, but we also have some addi
 
 ## Changelog
 For the changelog we follow [keep a changelog](https://keepachangelog.com/en/1.0.0/) guide.
+
+**[⬆ back to top](#table-of-contents)**
