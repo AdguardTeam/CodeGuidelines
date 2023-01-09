@@ -2838,19 +2838,6 @@ Heavily inspired by and partly composed of [Airbnb JavaScript Style Guide
   const CHILD_COMBINATOR = '>';
   ```
 
-  Regular expression constant names should contain `REGEXP` at the end of the name.
-
-  ```javascript
-  // bad
-  const NON_WHITESPACE = /\S/g;
-
-  // bad
-  const REGEXP_NON_WHITESPACE = /\S/g;
-
-  // good
-  const NON_WHITESPACE_REGEXP = /\S/g;
-  ```
-
 **[⬆ back to top](#table-of-contents)**
 
 ## Accessors
