@@ -676,7 +676,7 @@ Heavily inspired by and partly composed of [Airbnb JavaScript Style Guide
 ## Arrow Functions
 
 <a name="arrows--use-them"></a>
-- [8.1](arrows--use-them) When you must use an anonymous function (as when passing an inline callback), use arrow function notation. eslint: [`prefer-arrow-callback`](https://eslint.org/docs/rules/prefer-arrow-callback), [`arrow-spacing`](https://eslint.org/docs/rules/arrow-spacing)
+- [8.1](#arrows--use-them) When you must use an anonymous function (as when passing an inline callback), use arrow function notation. eslint: [`prefer-arrow-callback`](https://eslint.org/docs/rules/prefer-arrow-callback), [`arrow-spacing`](https://eslint.org/docs/rules/arrow-spacing)
 
   > Why? It creates a version of the function that executes in the context of `this`, which is usually what you want, and is a more concise syntax.
 
@@ -943,7 +943,7 @@ Heavily inspired by and partly composed of [Airbnb JavaScript Style Guide
   ```
 
 <a name="modules--no-export-from-import"></a>
-- [10.3](modules--no-export-from-import) And do not export directly from an import.
+- [10.3](#modules--no-export-from-import) And do not export directly from an import.
 
   > Why? Although the one-liner is concise, having one clear way to import and one clear way to export makes things consistent.
 
@@ -1718,7 +1718,7 @@ Heavily inspired by and partly composed of [Airbnb JavaScript Style Guide
 ## Control Statements
 
 <a name="control-statements"></a>
-- [16.1]($control-statements) In case your control statement (`if`, `while` etc.) gets too long or exceeds the maximum line length, each (grouped) condition could be put into a new line. The logical operator should begin the line.
+- [16.1](#control-statements) In case your control statement (`if`, `while` etc.) gets too long or exceeds the maximum line length, each (grouped) condition could be put into a new line. The logical operator should begin the line.
 
   > Why? Requiring operators at the beginning of the line keeps the operators aligned and follows a pattern similar to method chaining. This also improves readability by making it easier to visually follow complex logic.
 
@@ -1771,7 +1771,7 @@ Heavily inspired by and partly composed of [Airbnb JavaScript Style Guide
   }
   ```
 
-<a name="control-statement--value-selection"></a><a name="control-statements--value-selection"></a>
+<a name="control-statement--value-selection"></a>
 - [16.2](#control-statement--value-selection) Don't use selection operators in place of control statements.
 
   ```javascript
@@ -2958,6 +2958,8 @@ Sample config can be found [here](./.eslintrc.js). Feel free to copy it and thou
 In TypeScript we use the same rules as in JavaScript, but we also have some additional guidelines that are specific to typescript.
 
 ### Naming conventions
+
+<a name="typescript--enum-naming-conventions"></a>
 - [25.1](#typescript--enum-naming-conventions) Use `PascalCase` enum names and enum properties.
 
   ```typescript
@@ -2996,7 +2998,9 @@ In TypeScript we use the same rules as in JavaScript, but we also have some addi
   ```
 
 ### tsconfig flags
-- [26.1](#typescript--tsconfig-flags-) Use `strict: true` in your `tsconfig.json` file.
+
+<a name="typescript--tsconfig-strict"></a>
+- [26.1](#typescript--tsconfig-strict) Use `strict: true` in your `tsconfig.json` file.
 
   ```json
   {
@@ -3006,7 +3010,8 @@ In TypeScript we use the same rules as in JavaScript, but we also have some addi
   }
   ```
 
-- [26.2](#typescript--tsconfig-flags-) Use `"noUncheckedIndexedAccess": true` in your `tsconfig.json` file. This is a good practice because it prevents you from accessing elements that don't exist. Read more about it [here](https://www.typescriptlang.org/tsconfig#noUncheckedIndexedAccess).
+<a name="typescript--tsconfig-nouncheckedindexedaccess"></a>
+- [26.2](#typescript--tsconfig-nouncheckedindexedaccess) Use `"noUncheckedIndexedAccess": true` in your `tsconfig.json` file. This is a good practice because it prevents you from accessing elements that don't exist. Read more about it [here](https://www.typescriptlang.org/tsconfig#noUncheckedIndexedAccess).
 
   ```json
   {
