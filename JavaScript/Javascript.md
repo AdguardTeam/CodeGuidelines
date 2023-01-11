@@ -2827,6 +2827,17 @@ Heavily inspired by and partly composed of [Airbnb JavaScript Style Guide
   ];
   ```
 
+<a name="naming--constants"></a>
+- [22.7](#naming--constants) Use UPPER_SNAKE_CASE when naming constants.
+
+  ```javascript
+  // bad
+  const childCombinator = '>';
+
+  // good
+  const CHILD_COMBINATOR = '>';
+  ```
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Accessors
