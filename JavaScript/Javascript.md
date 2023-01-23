@@ -3021,6 +3021,27 @@ In TypeScript we use the same rules as in JavaScript, but we also have some addi
   }
   ```
 
+### Caught error type
+
+<a name="typescript--caught-error-type"></a>
+- [25.3](#typescript--caught-error-type) Use `unknown` type for caught errors.
+
+  ```typescript
+  // bad
+  try {
+    throwingErrorFunction();
+  } catch (error: any) {
+    console.error(error);
+  }
+
+  // good
+  try {
+    throwingErrorFunction();
+  } catch (error: unknown) {
+    console.error(error);
+  }
+  ```
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Changelog
