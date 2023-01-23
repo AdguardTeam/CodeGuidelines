@@ -3029,14 +3029,14 @@ In TypeScript we use the same rules as in JavaScript, but we also have some addi
   ```typescript
   // bad
   try {
-    nonExistentFunction();
+    throwingErrorFunction();
   } catch (error: any) {
     console.error(error);
   }
 
   // good
   try {
-    nonExistentFunction();
+    throwingErrorFunction();
   } catch (error: unknown) {
     console.error(error);
   }
