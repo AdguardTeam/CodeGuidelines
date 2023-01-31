@@ -527,3 +527,8 @@ Information that is diagnostically helpful to the developer.
 
 ### TRACE
 Very detailed information used only in specific cases to find out the reasons of much-complicated issues
+
+## Never use Extension Methods
+
+All the additional logic that is necessary is implemented through utility classes
+
