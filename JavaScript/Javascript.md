@@ -1730,37 +1730,22 @@ Heavily inspired by and partly composed of [Airbnb JavaScript Style Guide
 
   // bad
   if (foo === 123 &&
-    bar === 'abc') {
+      bar === 'abc'
+  ) {
     thing1();
   }
 
-  // bad
+  // good
   if (foo === 123
-    && bar === 'abc') {
-    thing1();
-  }
-
-  // bad
-  if (
-    foo === 123 &&
-    bar === 'abc'
+      && bar === 'abc'
   ) {
     thing1();
   }
 
   // good
-  if (
-    foo === 123
-    && bar === 'abc'
-  ) {
-    thing1();
-  }
-
-  // good
-  if (
-    (foo === 123 || bar === 'abc')
-    && doesItLookGoodWhenItBecomesThatLong()
-    && isThisReallyHappening()
+  if ((foo === 123 || bar === 'abc')
+      && doesItLookGoodWhenItBecomesThatLong()
+      && isThisReallyHappening()
   ) {
     thing1();
   }
