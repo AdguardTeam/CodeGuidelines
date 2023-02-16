@@ -257,6 +257,10 @@ Try to limit line length. This limit can be arbitrary (e.g. 80 or 100 characters
 
 Try to limit the length of method and code blocks by 50 lines so that they are not trying to do too much. Shorter methods are easier to test, and smaller sections of code are more quickly comprehended by developers.
 
+**Never use Extension Methods**
+
+All the additional logic that is necessary is implemented through utility classes
+
 **Brackets and blocks**
 
 Open braces should always be at the beginning of the line after the statement that begins the block.
@@ -527,9 +531,4 @@ Information that is diagnostically helpful to the developer.
 
 ### TRACE
 Very detailed information used only in specific cases to find out the reasons of much-complicated issues
-
-## Never use Extension Methods
-**Never use Extension Methods**
-
-All the additional logic that is necessary is implemented through utility classes
 
