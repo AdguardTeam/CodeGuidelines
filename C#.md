@@ -274,15 +274,15 @@ There is an exclusion for singleton object constructors, that are not supposed t
 /// <summary>
 /// Initializes an instance of <see cref="SomeService"/>
 /// </summary>
-/// <param name="service1">The nice service</param> // this information is useless.
-/// <param name="service1">The good service</param>
-/// <param name="service1">The smart service</param>
-/// <param name="service1">The N service</param>
+/// <param name="niceService">The nice service</param> // this information is useless.
+/// <param name="goodService">The good service</param>
+/// <param name="smartService">The smart service</param>
+/// <param name="nService">The N service</param>
 public SomeService(
-    INiceService service,
-    IGoodService service,
-    ISmartService service,
-    INService service)
+    INiceService niceService,
+    IGoodService goodService,
+    ISmartService smartService,
+    INService nService)
   {
     ...
   }
@@ -293,10 +293,10 @@ public SomeService(
 /// Initializes an instance of <see cref="SomeService"/>
 /// </summary>
 public SomeService(
-    INiceService service,
-    IGoodService service,
-    ISmartService service,
-    INService service)
+    INiceService niceService,
+    IGoodService goodService,
+    ISmartService smartService,
+    INService nService)
   {
     ...
   }
