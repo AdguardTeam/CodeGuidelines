@@ -224,6 +224,86 @@ public static double Add(double a, double b)
 }
 ```
 
+
+### Documenting a Constructor
+
+A constructor doc should tell the specific information about usage and parameters, if there is some not obvious behaviour.
+
+```C#
+/// <summary>
+/// Initializes a new instance of <see cref="SomeTransientObject"/> with the concatentaion of passed values: *explaination if required*
+/// </summary>
+/// <param name="value1">The unique value 1.</param>
+/// <param name="value2">The unique value 2</param>
+/// <exception cref="ArgumentException">Thrown, if values are equal.</exception>
+public SomeTransientObject(
+    Value1 value1,
+    Value2 value2)
+  {
+    // thrown exceptions must be documented.
+    if (value1.Equals(value2){
+      throw ArguementException(nameof(value1));
+    })
+
+    // not obvious behaviour must be documented.
+    Value = value1.Append(value2);
+  }
+```
+
+However, even if the constructor contains only transparent initialization code, we should leave a minimal boilerplate comment, e.g. :
+
+```C#
+/// <summary>
+/// Initializes a new instance of <see cref="SomeTransientObject"/>
+/// </summary>
+/// <param name="value1">The description of value1</param>
+/// <param name="value2">The description of value2</param>
+public SomeTransientObject(
+    Value1 value1,
+    Value2 value2)
+  {
+    Value1 = value1;
+    Value2 = value2;
+  }
+```
+
+There is an exclusion for singleton object constructors, that are not supposed to have any explicit usages and require only injected types as parameters (e.g. created only using IoC, or reflection). For such objects we don't describe parameters, because it clutters up the code and causes additional merge conflicts, while it does not contain any useful information:
+```C#
+// bad
+
+/// <summary>
+/// Initializes an instance of <see cref="SomeService"/>
+/// </summary>
+/// <param name="niceService">The nice service</param> // this information is useless.
+/// <param name="goodService">The good service</param>
+/// <param name="smartService">The smart service</param>
+/// <param name="nService">The N service</param>
+public SomeService(
+    INiceService niceService,
+    IGoodService goodService,
+    ISmartService smartService,
+    INService nService)
+  {
+    ...
+  }
+
+// good
+
+/// <summary>
+/// Initializes an instance of <see cref="SomeService"/>
+/// </summary>
+public SomeService(
+    INiceService niceService,
+    IGoodService goodService,
+    ISmartService smartService,
+    INService nService)
+  {
+    ...
+  }
+
+```
+
+
 ### Inline Comments
 
 Inline comments should always be added when the intent or purpose of any code isn't completely explicit, but the code itself ought to be clear enough to follow logically.
