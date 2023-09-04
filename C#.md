@@ -170,6 +170,12 @@ private void DoSomething()
 }
 ```
 
+**Generics**
+
+1. **Generic Version**: If you have a generic only version of a class or interface, name the file with the format `Something.cs`.
+
+2. **Both generic and non generic versions**: If you have both generic and non generic versions of a class or interface use `Something.cs` for non generic version file and `Something(T).cs` for generic version file.
+
 ## Comments and Documentation
 
 Have you ever heard that "good code is supposed to be self-explanatory"? I'd love to find the author of this statement and tell him everything I think about it. This guy is responsible for thousands of unmaintainable projects because devs are lazy by nature and use it as excuse whenever it's possible.
