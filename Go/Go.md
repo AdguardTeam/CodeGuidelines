@@ -62,7 +62,8 @@ The rules are mostly sorted in the alphabetical order.
     Avoid packages `reflect` and `unsafe` unless absolutely necessary.  Always
     provide a comment explaining why you are using it.
 
- *  <a href="#li-c85dd96a" id="li-c85dd96a" name="li-c85dd96a">§</a>
+ *  <a href="#li-9d94cb85" id="li-9d94cb85" name="li-9d94cb85">§</a>
+    <a href="#li-c85dd96a" id="li-c85dd96a" name="li-c85dd96a"></a>
     Be aware of and strive to shorten resource scopes.
 
     For example, if you have a long function that makes an HTTP request and
@@ -213,18 +214,18 @@ The rules are mostly sorted in the alphabetical order.
     and the content, because when the minus sign is used to remove whitespace,
     it's an error to omit these spaces.
 
- *  <a href="#li-9d94cb85" id="li-9d94cb85" name="li-9d94cb85">§</a>
-    Minimize scope of variables as much as possible.
-
  *  <a href="#li-b97aacf8" id="li-b97aacf8" name="li-b97aacf8">§</a>
     No name shadowing, including of predeclared identifiers, since it can often
     lead to subtle bugs, especially with errors.  This rule does not apply to
     struct fields, since they are always used together with the name of the
     struct value, so there isn't any confusion.
 
+ *  <a href="#li-74517cf1 " id="li-74517cf1 " name="li-74517cf1">§</a>
+    Prefer build constraints to `runtime.GOOS`.
+
  *  <a href="#li-851dedf8" id="li-851dedf8" name="li-851dedf8">§</a>
-    Prefer constants to variables where possible.  Avoid global variables.  Use
-    [constant errors] instead of `errors.New`.
+    Prefer constants to variables where possible.  Avoid global variables unless
+    necessary.  Use [constant errors] instead of `errors.New`.
 
  *  <a href="#li-3a7f3909" id="li-3a7f3909" name="li-3a7f3909">§</a>
     Prefer defining `Foo.String` and `ParseFoo` in terms of `Foo.MarshalText`
@@ -265,9 +266,9 @@ The rules are mostly sorted in the alphabetical order.
     `go vet`, `errcheck`, and staticcheck if the project does not.
 
  *  <a href="#li-29dc9ef0" id="li-29dc9ef0" name="li-29dc9ef0">§</a>
-    When returning an error from a function that also returns a non-nillable
-    type, for example a `time.Time`, a `time.Duration`, or a `netip.Addr`, spell
-    the empty value explicitly to show that the value is invalid.
+    When returning an error from a function that also returns a non-nilable
+    type, for example a `time.Time`, a `time.Duration`, or a `netip.Addr`,
+    spell the empty value explicitly to show that the value is invalid.
 
     So, do this:
 
@@ -333,18 +334,6 @@ See also the [text guidelines][text].
  *  <a href="#li-2b24cce6" id="li-2b24cce6" name="li-2b24cce6">§</a>
     Don't put identifiers into any kind of quotes.
 
- *  <a href="#li-cc1ce4d8" id="li-cc1ce4d8" name="li-cc1ce4d8">§</a>
-    Prefer to add a file header comment describing what this file should
-    contain.  For example, a file like `validation.go` could start like this:
-
-    ```go
-    package user
-
-    import "strings"
-
-    // User Validation
-    ```
-
  *  <a href="#li-7eda22b4" id="li-7eda22b4" name="li-7eda22b4">§</a>
     Put comments above the documented entity, **not** to the side, to improve
     readability.
@@ -393,6 +382,23 @@ See also the [text guidelines][text].
 
     // toTime parses and also uses an optimized validation technique on an RFC
     // 3339 timestamp.
+    ```
+
+ *  <a href="#li-92230a03" id="li-92230a03" name="li-92230a03">§</a>
+    Document important contracts (assertions, pre- and postconditions) of
+    fields, functions and methods.  That is, nilness of arguments, state of
+    mutexes, relationship between struct fields, and so on.  As an exception,
+    a method receiver can be generally considered to be required to be non-nil,
+    unless a different behavior is explicitly documented.
+
+    For example:
+
+    ```go
+    // needsNonNil is an example of a method that requires a non-nil argument.
+    // m must not be nil.  r.mu is expected to be locked.
+    func (r *Receiver) needsNonNil(m *Message) (err error) {
+        // …
+    }
     ```
 
 
@@ -795,6 +801,10 @@ See also the [text guidelines][text].
     }
     ```
 
+ *  <a href="#li-3932b162 " id="li-3932b162 " name="li-3932b162">§</a>
+    Use names like `ErrFoo` for package-level error values and `FooError` for
+    error types.
+
  *  <a href="#li-c2c377e4" id="li-c2c377e4" name="li-c2c377e4">§</a>
     When naming a file which defines an entity, use singular nouns, unless the
     entity is some form of a container for other entities:
@@ -828,7 +838,7 @@ See also the [text guidelines][text].
 ##  <a href="#testing" id="testing" name="testing">Testing</a>
 
  *  <a href="#li-4f4ff827" id="li-4f4ff827" name="li-4f4ff827">§</a>
-    If you write a fake implementation of an interface for a test, prefer to 
+    If you write a fake implementation of an interface for a test, prefer to
     write it using callbacks:
 
     ```go
@@ -853,7 +863,9 @@ See also the [text guidelines][text].
     ```
 
  *  <a href="#li-a52e192a" id="li-a52e192a" name="li-a52e192a">§</a>
-    Prefer to put all tests into a separate [test package][tpkg].
+    Prefer to put all tests into a separate [test package][tpkg].  Tests in the
+    same package that check unexported APIs should be put into a separate file
+    named `foo_internal_test.go`.
 
  *  <a href="#li-b4f670ce" id="li-b4f670ce" name="li-b4f670ce">§</a>
     Strive to make the test suite finish quickly.  If you have long-running

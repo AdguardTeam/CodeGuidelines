@@ -1,4 +1,4 @@
- #  AdGuard Go Team Text And Commenting Guidelines
+ #  AdGuard Go Team text and commenting guidelines
 
 Following this document is obligatory for comments and text in new code.  Some
 of the rules aren't enforced as thoroughly or remain broken in old texts, but
@@ -28,18 +28,19 @@ The rules are mostly sorted in the alphabetical order.
     It isn't obvious that the code will not cause issues.
     ```
 
- *  <a href="#li-2db43ebe" id="li-2db43ebe" name="li-2db43ebe">§</a>
-    Capitalize every letter in a header or title.  So, a header should be
-    something like this:
+ *  <a href="#li-4df3b56b" id="li-4df3b56b" name="li-4df3b56b">§</a>
+    <a href="#li-2db43ebe" id="li-2db43ebe" name="li-2db43ebe"></a>
+    Capitalize only the first letter in headers and titles, unless a proper name
+    or an acronym is used.  So, a header should be something like this:
 
     ```none
-    Using The New API
+    Using the new API
     ```
 
     and **not** like this:
 
     ```none
-    Using the New API
+    Using The New API
     ```
 
  *  <a href="#li-a8c8a641" id="li-a8c8a641" name="li-a8c8a641">§</a>
@@ -49,10 +50,6 @@ The rules are mostly sorted in the alphabetical order.
  *  <a href="#li-658f569b" id="li-658f569b" name="li-658f569b">§</a>
     End sentences with appropriate punctuation.  Do not add full stops to
     headers.
-
- *  <a href="#li-4df3b56b" id="li-4df3b56b" name="li-4df3b56b">§</a>
-    Headers should be written with all initial letters capitalized, except for
-    references to variable names that start with a lowercase letter.
 
  *  <a href="#li-30850b1a" id="li-30850b1a" name="li-30850b1a">§</a>
     Mark temporary todos—that is, todos that must be resolved or removed before
@@ -110,7 +107,9 @@ The rules are mostly sorted in the alphabetical order.
     code right now as well as generally.
 
  *  <a href="#li-0569cfab" id="li-0569cfab" name="li-0569cfab">§</a>
-    Use double spacing between sentences to make sentence borders more clear.
+    Double spacing between sentences may be used in code comments to make
+    sentence borders more clear.  In human-facing documentation (Markdown,
+    etc.), prefer single spacing.
 
  *  <a href="#li-1a435693" id="li-1a435693" name="li-1a435693">§</a>
     Use the serial comma (a.k.a. Oxford comma) to improve comprehension,
