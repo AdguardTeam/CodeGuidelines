@@ -1,6 +1,6 @@
  #  AdGuard Go Team Development Guidelines
 
-Following this document is obligatory for all new Go code.  Some of the rules
+Following this document is obligatory for all new Go code. Some of the rules
 aren't enforced as thoroughly or remain broken in old code, but this is still
 the place to find out about what we **want** our code to look like and how to
 improve it.
@@ -31,16 +31,16 @@ The rules are mostly sorted in the alphabetical order.
 ##  <a href="#code" id="code" name="code">Code</a>
 
  *  <a href="#li-cb105c8c" id="li-cb105c8c" name="li-cb105c8c">§</a>
-    Avoid `break` and `continue` with labels.  Most of the time the code can be
+    Avoid `break` and `continue` with labels. Most of the time the code can be
     rewritten without them, and most of the time the resulting new code is also
     clearer.
 
  *  <a href="#li-5305b436" id="li-5305b436" name="li-5305b436">§</a>
-    Always `recover` from panics in new goroutines.  Preferably in the very
-    first statement.  If all you want there is a log message, use `log.OnPanic`.
+    Always `recover` from panics in new goroutines. Preferably in the very
+    first statement. If all you want there is a log message, use `log.OnPanic`.
 
  *  <a href="#li-02028202" id="li-02028202" name="li-02028202">§</a>
-    Avoid `fallthrough`.  It makes it harder to rearrange `case`s, to reason
+    Avoid `fallthrough`. It makes it harder to rearrange `case`s, to reason
     about the code, and also to switch the code to a handler approach, if that
     becomes necessary later.
 
@@ -51,7 +51,7 @@ The rules are mostly sorted in the alphabetical order.
     Avoid `init` and use explicit initialization functions instead.
 
  *  <a href="#li-fa33e482" id="li-fa33e482" name="li-fa33e482">§</a>
-    Avoid lazy initialization.  Constructors should validate their arguments and
+    Avoid lazy initialization. Constructors should validate their arguments and
     return meaningful errors.
 
  *  <a href="#li-6ae6bc94" id="li-6ae6bc94" name="li-6ae6bc94">§</a>
@@ -59,7 +59,7 @@ The rules are mostly sorted in the alphabetical order.
     for example when checking the type of an error using `errors.As`.
 
  *  <a href="#li-c9d7fde7" id="li-c9d7fde7" name="li-c9d7fde7">§</a>
-    Avoid packages `reflect` and `unsafe` unless absolutely necessary.  Always
+    Avoid packages `reflect` and `unsafe` unless absolutely necessary. Always
     provide a comment explaining why you are using it.
 
  *  <a href="#li-9d94cb85" id="li-9d94cb85" name="li-9d94cb85">§</a>
@@ -69,7 +69,7 @@ The rules are mostly sorted in the alphabetical order.
     For example, if you have a long function that makes an HTTP request and
     defers the close of the body at the beginning and then does more stuff, it's
     better to factor out the HTTP request and the response parsing into
-    a separate method.  Same goes for mutexes.
+    a separate method. Same goes for mutexes.
 
     That is, do **not** do this:
 
@@ -83,7 +83,7 @@ The rules are mostly sorted in the alphabetical order.
         v, err := decode(r)
         check(err)
 
-        // Lots of slow stuff with v.  r is only closed once Foo exits.
+        // Lots of slow stuff with v. r is only closed once Foo exits.
     }
     ```
 
@@ -109,11 +109,11 @@ The rules are mostly sorted in the alphabetical order.
 
  *  <a href="#li-d027c6cd" id="li-d027c6cd" name="li-d027c6cd">§</a>
     Be aware of structure alignment as well as the number of [pointer
-    bytes][ptr].  Exceptions could be made if a suboptimal alignment produces
+    bytes][ptr]. Exceptions could be made if a suboptimal alignment produces
     significantly better readability.
 
     ```go
-    // Bad!  Lots of padding between the uint64s and bools.  Pointers are at the
+    // Bad!  Lots of padding between the uint64s and bools. Pointers are at the
     // end of the structure.
     type bad struct {
         a uint64
@@ -129,7 +129,7 @@ The rules are mostly sorted in the alphabetical order.
         z *otherType
     }
 
-    // Good.  The padding is minimized, and the pointers are closer to the top.
+    // Good. The padding is minimized, and the pointers are closer to the top.
     type good struct {
         y *otherType
         z *otherType
@@ -166,9 +166,9 @@ The rules are mostly sorted in the alphabetical order.
     ```
 
  *  <a href="#li-eaba198b" id="li-eaba198b" name="li-eaba198b">§</a>
-    Context values should be considered immutable.  Do not use modifications
-    of context values as a means of communicating something up the stack.  That
-    is, do **not** do this:
+    Context values should be considered immutable. Do not use modifications of
+    context values as a means of communicating something up the stack. That is,
+    do **not** do this:
 
     ```go
     // Bad!  Function outer expects inner to mutate logEntry.
@@ -194,12 +194,12 @@ The rules are mostly sorted in the alphabetical order.
     ```
 
  *  <a href="#li-450c3236" id="li-450c3236" name="li-450c3236">§</a>
-    Don't rely only on file names for build tags to work.  Always add build tags
+    Don't rely only on file names for build tags to work. Always add build tags
     as well.
 
  *  <a href="#li-7a36cc4c" id="li-7a36cc4c" name="li-7a36cc4c">§</a>
     Don't use `fmt.Sprintf` where a more structured approach to string
-    conversion could be used.  For example, `netutil.JoinHostPort`,
+    conversion could be used. For example, `netutil.JoinHostPort`,
     `net.JoinHostPort` or `url.(*URL).String`.
 
  *  <a href="#li-71081433" id="li-71081433" name="li-71081433">§</a>
@@ -216,7 +216,7 @@ The rules are mostly sorted in the alphabetical order.
 
  *  <a href="#li-b97aacf8" id="li-b97aacf8" name="li-b97aacf8">§</a>
     No name shadowing, including of predeclared identifiers, since it can often
-    lead to subtle bugs, especially with errors.  This rule does not apply to
+    lead to subtle bugs, especially with errors. This rule does not apply to
     struct fields, since they are always used together with the name of the
     struct value, so there isn't any confusion.
 
@@ -224,8 +224,8 @@ The rules are mostly sorted in the alphabetical order.
     Prefer build constraints to `runtime.GOOS`.
 
  *  <a href="#li-851dedf8" id="li-851dedf8" name="li-851dedf8">§</a>
-    Prefer constants to variables where possible.  Avoid global variables unless
-    necessary.  Use [constant errors] instead of `errors.New`.
+    Prefer constants to variables where possible. Avoid global variables unless
+    necessary. Use [constant errors] instead of `errors.New`.
 
  *  <a href="#li-3a7f3909" id="li-3a7f3909" name="li-3a7f3909">§</a>
     Prefer defining `Foo.String` and `ParseFoo` in terms of `Foo.MarshalText`
@@ -233,7 +233,7 @@ The rules are mostly sorted in the alphabetical order.
 
  *  <a href="#li-edd678a8" id="li-edd678a8" name="li-edd678a8">§</a>
     Prefer to use pointers to structs in function arguments, including method
-    receivers, unless there is a reason to do the opposite.  Among valid reasons
+    receivers, unless there is a reason to do the opposite. Among valid reasons
     are:
 
      *  the struct is small, which typically means less than a few machine
@@ -262,8 +262,8 @@ The rules are mostly sorted in the alphabetical order.
     Don't forget to also [set the tab width][tab] in your editor's settings.
 
  *  <a href="#li-4bfdabf9" id="li-4bfdabf9" name="li-4bfdabf9">§</a>
-    Use linters.  `make go-lint`, if the project has one.  A minimum of
-    `go vet`, `errcheck`, and staticcheck if the project does not.
+    Use linters. `make go-lint`, if the project has one. A minimum of `go vet`,
+    `errcheck`, and staticcheck if the project does not.
 
  *  <a href="#li-29dc9ef0" id="li-29dc9ef0" name="li-29dc9ef0">§</a>
     When returning an error from a function that also returns a non-nilable
@@ -360,7 +360,7 @@ See also the [text guidelines][text].
 
  *  <a href="#li-dca638fe" id="li-dca638fe" name="li-dca638fe">§</a>
     Write names of RFCs without a hyphen and don't put a newline between the
-    letters and the numbers.  Godoc and pkg.go.dev both will add a link to the
+    letters and the numbers. Godoc and pkg.go.dev both will add a link to the
     RFC, but only if the RFC is spelled that way.
 
     So, do this:
@@ -386,8 +386,8 @@ See also the [text guidelines][text].
 
  *  <a href="#li-92230a03" id="li-92230a03" name="li-92230a03">§</a>
     Document important contracts (assertions, pre- and postconditions) of
-    fields, functions and methods.  That is, nilness of arguments, state of
-    mutexes, relationship between struct fields, and so on.  As an exception,
+    fields, functions and methods. That is, nilness of arguments, state of
+    mutexes, relationship between struct fields, and so on. As an exception,
     a method receiver can be generally considered to be required to be non-nil,
     unless a different behavior is explicitly documented.
 
@@ -395,7 +395,7 @@ See also the [text guidelines][text].
 
     ```go
     // needsNonNil is an example of a method that requires a non-nil argument.
-    // m must not be nil.  r.mu is expected to be locked.
+    // m must not be nil. r.mu is expected to be locked.
     func (r *Receiver) needsNonNil(m *Message) (err error) {
         // …
     }
@@ -406,7 +406,7 @@ See also the [text guidelines][text].
 ##  <a href="#errors" id="errors" name="errors">Error Handling</a>
 
  *  <a href="#li-651fcd50" id="li-651fcd50" name="li-651fcd50">§</a>
-    Add context to errors but avoid duplication.  For example, `os.Open` always
+    Add context to errors but avoid duplication. For example, `os.Open` always
     adds the path to its error, so this is redundant:
 
     ```go
@@ -418,7 +418,7 @@ See also the [text guidelines][text].
     ```
 
     If a function returns enough context, or a deferred helper is used, document
-    that.  Prefer to use a standard comment across a project.  For example:
+    that. Prefer to use a standard comment across a project. For example:
 
     ```go
     err = f()
@@ -429,9 +429,9 @@ See also the [text guidelines][text].
     ```
 
  *  <a href="#li-17e872ff" id="li-17e872ff" name="li-17e872ff">§</a>
-    Avoid having multiple errors in a function.  In situations when it's not
-    feasible, use meaningful names.  For example, `closeErr` for errors
-    from `Close()` or `testErr` for subtest errors.
+    Avoid having multiple errors in a function. In situations when it's not
+    feasible, use meaningful names. For example, `closeErr` for errors from
+    `Close()` or `testErr` for subtest errors.
 
  *  <a href="#li-9e172a2e" id="li-9e172a2e" name="li-9e172a2e">§</a>
     Avoid using the word `error` inside error messages.
@@ -463,7 +463,7 @@ See also the [text guidelines][text].
     project has its own conventions regarding uppercase letters.
 
  *  <a href="#li-6d1104bd" id="li-6d1104bd" name="li-6d1104bd">§</a>
-    Use `panic` **only** to indicate critical assertion failures.  **Do not**
+    Use `panic` **only** to indicate critical assertion failures. **Do not**
     use panics for normal error handling.
 
  *  <a href="#li-f6d13b11" id="li-f6d13b11" name="li-f6d13b11">§</a>
@@ -500,7 +500,7 @@ See also the [text guidelines][text].
     with empty lines unless it's the only statement in that block.
 
  *  <a href="#li-82784b41" id="li-82784b41" name="li-82784b41">§</a>
-    Don't group type declarations together.  Unlike with blocks of `const`s,
+    Don't group type declarations together. Unlike with blocks of `const`s,
     where a `iota` may be used or where all constants belong to a certain type,
     there is no reason to group `type`s.
 
@@ -589,7 +589,7 @@ See also the [text guidelines][text].
 
  *  <a href="#li-46a924cd" id="li-46a924cd" name="li-46a924cd">§</a>
     Put deferred calls of destructors, for example `f.Close()`, into the same
-    paragraph as constructors.  This is an exception to the [paragraph
+    paragraph as constructors. This is an exception to the [paragraph
     rule][par].
 
     ```go
@@ -613,7 +613,7 @@ See also the [text guidelines][text].
     ```
 
  *  <a href="#li-f2156af9" id="li-f2156af9" name="li-f2156af9">§</a>
-    Start a new paragraph after the final closing curly brace of a block.  So
+    Start a new paragraph after the final closing curly brace of a block. So
     this:
 
     ```go
@@ -654,7 +654,7 @@ See also the [text guidelines][text].
  *  <a href="#li-d9b8f5a8" id="li-d9b8f5a8" name="li-d9b8f5a8">§</a>
     When a function's definition becomes [too long][long], first make the
     function's arguments vertically placed and only then do the same with the
-    return values.  That is, do this:
+    return values. That is, do this:
 
     ```go
     func functionWithALongName(
@@ -725,7 +725,7 @@ See also the [text guidelines][text].
 
  *  <a href="#li-cc358586" id="li-cc358586" name="li-cc358586">§</a>
     Don't use underscores in file and package names, unless they're build tags
-    or for tests.  This is to prevent accidental build errors with weird tags.
+    or for tests. This is to prevent accidental build errors with weird tags.
 
  *  <a href="#li-5a2d4941" id="li-5a2d4941" name="li-5a2d4941">§</a>
     For brands or words with more than 1 capital letter, lowercase all letters:
@@ -745,7 +745,7 @@ See also the [text guidelines][text].
     ```
 
  *  <a href="#li-a3a30716" id="li-a3a30716" name="li-a3a30716">§</a>
-    Name benchmarks and tests using the same convention as examples.  For
+    Name benchmarks and tests using the same convention as examples. For
     example:
 
     ```go
@@ -758,7 +758,7 @@ See also the [text guidelines][text].
  *  <a href="#li-4b3adb1b" id="li-4b3adb1b" name="li-4b3adb1b">§</a>
     Name `context.Context` helper functions that return values from the context
     `FooFromContext` and the ones that return a new contest with new values,
-    `ContextWithFoo` or `WithFoo`.  Just like in the standard library, the
+    `ContextWithFoo` or `WithFoo`. Just like in the standard library, the
     parent context should be called `parent`.
 
     ```go
@@ -863,15 +863,15 @@ See also the [text guidelines][text].
     ```
 
  *  <a href="#li-a52e192a" id="li-a52e192a" name="li-a52e192a">§</a>
-    Prefer to put all tests into a separate [test package][tpkg].  Tests in the
+    Prefer to put all tests into a separate [test package][tpkg]. Tests in the
     same package that check unexported APIs should be put into a separate file
     named `foo_internal_test.go`.
 
  *  <a href="#li-b4f670ce" id="li-b4f670ce" name="li-b4f670ce">§</a>
-    Strive to make the test suite finish quickly.  If you have long-running
-    integration test or fuzzes, document them, put them into a separate Makefile
-    target, and include them into the CI pipeline, but not the main `make test`
-    target.
+    Strive to make the test suite finish quickly. If you have long-running
+    integration test or fuzzes, document them, put them into a separate
+    Makefile target, and include them into the CI pipeline, but not the main
+    `make test` target.
 
  *  <a href="#li-9124bf62" id="li-9124bf62" name="li-9124bf62">§</a>
     Use `assert.NoError` and `require.NoError` instead of `assert.Nil` and

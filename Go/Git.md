@@ -1,14 +1,14 @@
- #  AdGuard Go Team Git Guidelines
+ #  AdGuard Go Team Git guidelines
 
  *  <a href="#li-b085c724" id="li-b085c724" name="li-b085c724">§</a>
     Call your branches either `NNNN-fix-foo` (where `NNNN` is the ID of the
     GitHub / GitLab / Jira issue you worked on in this branch) or just `fix-foo`
-    if there was no issue.  Make sure to always spell the Jira IDs (but [not the
+    if there was no issue. Make sure to always spell the Jira IDs (but [not the
     suffix][low]) in uppercase letters to make sure it gets linked.
 
  *  <a href="#li-6ff49977" id="li-6ff49977" name="li-6ff49977">§</a>
     Do not put your text editors' temporary files into the project's
-    `.gitignore` files.  The more are added, the harder they become to maintain.
+    `.gitignore` files. The more are added, the harder they become to maintain.
     Put them into your [global `.gitignore`][ignore] file instead.
 
     Only build, run, and test outputs should be placed into `.gitignore`,
@@ -22,14 +22,14 @@
     ```
 
     Where `pkg` is usually the directory or Go package (without the
-    `internal/…` part) where most changes took place.  If there are several
-    such packages, or the change is top-level only, write `all`.
+    `internal/…` part) where most changes took place. If there are several such
+    packages, or the change is top-level only, write `all`.
 
  *  <a href="#li-ebd6a188" id="li-ebd6a188" name="li-ebd6a188">§</a>
     Keep your commit messages, including headers, to eighty (**80**) columns.
 
  *  <a href="#li-b5f7773a" id="li-b5f7773a" name="li-b5f7773a">§</a>
-    Only use lowercase letters in your commit message headers.  The rest of the
+    Only use lowercase letters in your commit message headers. The rest of the
     message should follow the [plain text conventions][text].
 
     The exceptions are direct mentions of identifiers from the source code and

@@ -1,12 +1,12 @@
- #  AdGuard Go Team YAML Guidelines
+ #  AdGuard Go Team YAML guidelines
 
  *  **TODO(a.garipov):** Define naming conventions for schema names in our
-    OpenAPI YAML file.  And just generally OpenAPI conventions.
+    OpenAPI YAML file. And just generally OpenAPI conventions.
 
  *  **TODO(a.garipov):** Find a YAML formatter or write our own.
 
  *  <a href="#li-c412a475" id="li-c412a475" name="li-c412a475">§</a>
-    All strings, including keys, must be quoted.  Reason: the “[NO-rway Law]”.
+    All strings, including keys, must be quoted. Reason: the “[NO-rway Law]”.
 
  *  <a href="#li-2a425f43" id="li-2a425f43" name="li-2a425f43">§</a>
     Indent with four (**4**) spaces.
@@ -38,7 +38,7 @@
     GitHub Actions).
 
  *  <a href="#li-442b7b18" id="li-442b7b18" name="li-442b7b18">§</a>
-    Use `>` for multiline strings, unless you need to keep the line breaks.  Use
+    Use `>` for multiline strings, unless you need to keep the line breaks. Use
     `|` for multiline strings when you do.
 
 [NO-rway Law]: https://news.ycombinator.com/item?id=17359376

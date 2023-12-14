@@ -1,4 +1,4 @@
- #  AdGuard Go Team Shell Scripts Guidelines
+ #  AdGuard Go Team Shell scripts guidelines
 
 Following this document is obligatory for all new code.
 
@@ -22,7 +22,7 @@ The rules are mostly sorted in the alphabetical order.
     Avoid spaces between patterns of the same `case` condition.
 
  *  <a href="#li-f0aa2892" id="li-f0aa2892" name="li-f0aa2892">§</a>
-    Don't use the option `-q` of the command `ls`.  Some systems that use the
+    Don't use the option `-q` of the command `ls`. Some systems that use the
     Busybox version of `ash` don't support it.
 
  *  <a href="#li-4c329619" id="li-4c329619" name="li-4c329619">§</a>
@@ -52,11 +52,11 @@ The rules are mostly sorted in the alphabetical order.
     Prefer `'raw strings'` to `"double quoted strings"` whenever possible.
 
  *  <a href="#li-3a851da5" id="li-3a851da5" name="li-3a851da5">§</a>
-    Put spaces within `$( cmd )`, `$(( expr ))`, and `{ cmd; }`.  Avoid spaces
+    Put spaces within `$( cmd )`, `$(( expr ))`, and `{ cmd; }`. Avoid spaces
     within `${var}`.
 
  *  <a href="#li-1e74ed3b" id="li-1e74ed3b" name="li-1e74ed3b">§</a>
-    Put utility flags in the ASCII order and **don't** group them together.  For
+    Put utility flags in the ASCII order and **don't** group them together. For
     example, `ls -1 -A -l`.
 
  *  <a href="#li-be24aa66" id="li-be24aa66" name="li-be24aa66">§</a>
@@ -64,7 +64,7 @@ The rules are mostly sorted in the alphabetical order.
     For comments, see the text section below.
 
  *  <a href="#li-e9ecb034" id="li-e9ecb034" name="li-e9ecb034">§</a>
-    `snake_case`, not `camelCase` for variables.  `kebab-case` for filenames.
+    `snake_case`, not `camelCase` for variables. `kebab-case` for filenames.
 
  *  <a href="#li-d585008c" id="li-d585008c" name="li-d585008c">§</a>
     Start scripts with the following sections in the following order:
@@ -87,11 +87,11 @@ The rules are mostly sorted in the alphabetical order.
 
  *  <a href="#li-5a57edc0" id="li-5a57edc0" name="li-5a57edc0">§</a>
     When concatenating, always use the form with curly braces to prevent
-    accidental bad variable names.  That is, `"${var}_tmp.txt"` and **not**
-    `"$var_tmp.txt"`.  The latter will try to lookup variable `var_tmp`.
+    accidental bad variable names. That is, `"${var}_tmp.txt"` and **not**
+    `"$var_tmp.txt"`. The latter will try to lookup variable `var_tmp`.
 
  *  <a href="#li-e5cd3adb" id="li-e5cd3adb" name="li-e5cd3adb">§</a>
-    When concatenating, surround the whole string with quotes.  That is, use
+    When concatenating, surround the whole string with quotes. That is, use
     this:
 
     ```sh
@@ -120,7 +120,7 @@ Guidelines and agreements for using command `test`, also known as `[`:
 
  *  <a href="#li-dbf52941" id="li-dbf52941" name="li-dbf52941">§</a>
     Spell compound conditions with `&&`, `||`, and `!` **outside** of `test`
-    instead of `-a`, `-o`, and `!` **inside** of `test` correspondingly.  The
+    instead of `-a`, `-o`, and `!` **inside** of `test` correspondingly. The
     latter ones are pretty much deprecated in POSIX.
 
     See also: “[Problems With the `test` Builtin: What Does `-a` Mean?][test]”.
