@@ -1,6 +1,19 @@
  #  AdGuard Go Team Markdown guidelines
 
+> [!NOTE]
+>
+> Some rules are deprecated. New code should instead use `markdownlint` and follow the configuration and guidelines favored by the Content Team.
+>
+> See <https://github.com/AdguardTeam/KnowledgeBaseDNS/blob/master/.markdownlint.json> and <https://github.com/igorshubovych/markdownlint-cli>.
+
  *  <a href="#li-2e3958da" id="li-2e3958da" name="li-2e3958da">§</a>
+
+    > [!WARNING]
+    >
+    > This rule is deprecated.  See message at the beginning of the document.
+
+    <del>
+
     Align things to multiples of four columns. Leave two spaces between the
     marker and the content. Below are some examples:
 
@@ -46,6 +59,8 @@
         </p>
         ```
 
+    </del>
+
  *  <a href="#li-73836f61" id="li-73836f61" name="li-73836f61">§</a>
     Do not ever change elements' IDs. That breaks people's links. Strive to
     give links to moved content.
@@ -82,9 +97,9 @@
     ```md
     The tight list of valid values:
 
-     *  6
-     *  24
-     *  72
+     *  6;
+     *  24;
+     *  72.
     ```
 
  *  <a href="#li-e2113143" id="li-e2113143" name="li-e2113143">§</a>
@@ -94,7 +109,7 @@
     code blocks instead.
 
  *  <a href="#li-0f43f94c" id="li-0f43f94c" name="li-0f43f94c">§</a>
-    Provide a table of content for large documents.
+    Provide a table of contents for large documents.
 
  *  <a href="#li-099ae6d9" id="li-099ae6d9" name="li-099ae6d9">§</a>
     Put punctuation inside the text in bold and italic:
@@ -121,12 +136,22 @@
     adblock rules.
 
  *  <a href="#li-6f29ab84" id="li-6f29ab84" name="li-6f29ab84">§</a>
+
+    > [!WARNING]
+    >
+    > This rule is obsoleted by the [rule about `names`][names].
+
     <del>Use the IDs that GitHub would generate in order for this to work both
     on GitHub and most other Markdown renderers.</del>
 
-    This rule is obsoleted by the [rule about `names`][names].
-
  *  <a href="#li-fe52a949" id="li-fe52a949" name="li-fe52a949">§</a>
+
+    > [!WARNING]
+    >
+    > This rule is deprecated.  See message at the beginning of the document.
+
+    <del>
+
     When a code block interrupts a flow of a sentence, the line following the
     code block should start with a small letter.
 
@@ -139,5 +164,7 @@
 
     will print `hello from process #42`.
     ~~~
+
+    </del>
 
 [names]: #li-a825a6f4
