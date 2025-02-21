@@ -1602,7 +1602,7 @@ Heavily inspired by and partly composed of [Airbnb JavaScript Style Guide
 ## Blocks
 
 <a name="blocks--braces"></a>
-- [15.1](#blocks--braces) Use braces with if statements, and break up block statments into multiple lines. eslint: [`curly`](https://eslint.org/docs/latest/rules/curly) [`brace-style`](https://eslint.org/docs/latest/rules/brace-style)
+- [15.1](#blocks--braces) Use block statements within control structures, and break up block statements into multiple lines. eslint: [`curly`](https://eslint.org/docs/latest/rules/curly) [`brace-style`](https://eslint.org/docs/latest/rules/brace-style)
 
   ```javascript
   // bad
