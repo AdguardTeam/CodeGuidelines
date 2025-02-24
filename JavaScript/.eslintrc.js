@@ -15,6 +15,8 @@ module.exports = {
             'ignoreTrailingComments': false,
             'ignoreComments': false
         }],
+        'curly': ['error', 'all'],
+        'brace-style': ['error', '1tbs', { 'allowSingleLine': false }],
         indent: ['error', 4, {
             SwitchCase: 1,
         }],
