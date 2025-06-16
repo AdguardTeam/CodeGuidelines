@@ -7,6 +7,8 @@ module.exports = {
         'plugin:jsdoc/recommended',
     ],
     rules: {
+        'no-console': 'error',
+        'no-await-in-loop': 'off',
         'max-len': ['error', {
             'code': 120,
             'comments': 120,
