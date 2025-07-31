@@ -1109,6 +1109,10 @@ Heavily inspired by and partly composed of [Airbnb JavaScript Style Guide
   import d from '../d';
   ```
 
+  > [!NOTE]
+  > `import b from 'a';` should be before `import a from 'b';`, because ordering should be based on the import path,
+  > not the import name.
+
 <a name="modules--import-member-order"></a>
 - [10.12](#modules--import-member-order) Order named imports alphabetically.
 
