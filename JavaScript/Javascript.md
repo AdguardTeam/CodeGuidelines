@@ -1066,8 +1066,8 @@ Heavily inspired by and partly composed of [Airbnb JavaScript Style Guide
 
   - Built-in modules (i.e. Node.js modules)
   - External modules (i.e. packages from npm)
-  - Parent internal modules (i.e. modules from the same project, e.g. `../foo`)
-  - Sibling internal modules (i.e. modules from the same project, e.g. `./foo`)
+  - Parent internal modules (i.e. modules from the same project, below the current directory, e.g. `../foo` or `../../foo`)
+  - Sibling internal modules (i.e. modules from the same project, at the same directory level as the current file, e.g. `./foo`)
 
   > Why? This makes it easier to find and understand the dependencies of a module.
   > This way, we have the "most far" dependencies in the top, then the "most close" dependencies in the bottom.
