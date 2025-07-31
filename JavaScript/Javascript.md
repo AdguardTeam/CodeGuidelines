@@ -1061,6 +1061,67 @@ Heavily inspired by and partly composed of [Airbnb JavaScript Style Guide
   import baz from './baz';
   ```
 
+<a name="modules--import-grouping"></a>
+- [10.10](#modules--import-grouping) Imports should be grouped into the following categories, separated by blank lines:
+
+  - Built-in modules (i.e. Node.js modules)
+  - External modules (i.e. packages from npm)
+  - Parent internal modules (i.e. modules from the same project, e.g. `../foo`)
+  - Sibling internal modules (i.e. modules from the same project, e.g. `./foo`)
+
+  > Why? This makes it easier to find and understand the dependencies of a module.
+  > This way, we have the "most far" dependencies in the top, then the "most close" dependencies in the bottom.
+
+  ```javascript
+  // bad
+  import foo from './foo';
+  import fs from 'node:fs';
+  import bar from '../bar';
+  import npmPackage from 'npm-package';
+
+  // good
+  import fs from 'node:fs';
+  import npmPackage from 'npm-package';
+
+  import bar from '../bar';
+
+  import foo from './foo';
+  ```
+
+<a name="modules--import-order"></a>
+- [10.11](#modules--import-order) Order imports alphabetically within each import group. Order should happen based on the import path.
+
+  > Why? This makes it easier to find and understand the dependencies of a module.
+
+  ```javascript
+  // bad
+  import b from 'b';
+  import a from 'a';
+
+  import d from '../d';
+  import c from '../c';
+
+  // good
+  import a from 'a';
+  import b from 'b';
+
+  import c from '../c';
+  import d from '../d';
+  ```
+
+<a name="modules--import-member-order"></a>
+- [10.12](#modules--import-member-order) Order named imports alphabetically.
+
+  > Why? This makes it easier to find and understand the dependencies of a module.
+
+  ```javascript
+  // bad
+  import { b, a } from 'foo';
+
+  // good
+  import { a, b } from 'foo';
+  ```
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Properties
