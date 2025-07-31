@@ -1116,7 +1116,7 @@ Heavily inspired by and partly composed of [Airbnb JavaScript Style Guide
 
 <a name="modules--import-member-order"></a>
 - [10.12](#modules--import-member-order) Order named imports alphabetically.
-  eslint: [`import/order`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/order.md)
+  eslint: [`import/order`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/order.md) / [`sort-imports`](https://eslint.org/docs/latest/rules/sort-imports)
 
   > Why? This makes it easier to find and understand the dependencies of a module.
 
