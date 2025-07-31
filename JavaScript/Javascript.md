@@ -1113,19 +1113,6 @@ Heavily inspired by and partly composed of [Airbnb JavaScript Style Guide
   > `import b from 'a';` should be before `import a from 'b';`, because ordering should be based on the import path,
   > not the import name.
 
-<a name="modules--import-node-prefix"></a>
-- [10.12](#modules--import-node-prefix) Use `node:` prefix for Node.js built-in modules.
-
-  > Why? Using the `node:` prefix makes it explicit that a module is built-in, improving clarity and avoiding conflicts with similarly named packages.
-
-  ```javascript
-  // bad
-  import fs from 'fs';
-
-  // good
-  import fs from 'node:fs';
-  ```
-
 <a name="modules--import-member-order"></a>
 - [10.12](#modules--import-member-order) Order named imports alphabetically.
 
@@ -1137,6 +1124,19 @@ Heavily inspired by and partly composed of [Airbnb JavaScript Style Guide
 
   // good
   import { a, b } from 'foo';
+  ```
+
+<a name="modules--import-node-prefix"></a>
+- [10.13](#modules--import-node-prefix) Use `node:` prefix for Node.js built-in modules.
+
+  > Why? Using the `node:` prefix makes it explicit that a module is built-in, improving clarity and avoiding conflicts with similarly named packages.
+
+  ```javascript
+  // bad
+  import fs from 'fs';
+
+  // good
+  import fs from 'node:fs';
   ```
 
 **[⬆ back to top](#table-of-contents)**
