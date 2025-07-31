@@ -1063,6 +1063,7 @@ Heavily inspired by and partly composed of [Airbnb JavaScript Style Guide
 
 <a name="modules--import-grouping"></a>
 - [10.10](#modules--import-grouping) Imports should be grouped into the following categories, separated by blank lines:
+  eslint: [`import/order`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/order.md)
 
   - Built-in modules (i.e. Node.js modules)
   - External modules (i.e. packages from npm)
@@ -1090,6 +1091,7 @@ Heavily inspired by and partly composed of [Airbnb JavaScript Style Guide
 
 <a name="modules--import-order"></a>
 - [10.11](#modules--import-order) Order imports alphabetically within each import group. Order should happen based on the import path.
+  eslint: [`import/order`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/order.md)
 
   > Why? This makes it easier to find and understand the dependencies of a module.
 
@@ -1109,12 +1111,12 @@ Heavily inspired by and partly composed of [Airbnb JavaScript Style Guide
   import d from '../d';
   ```
 
-  > [!NOTE]
-  > `import b from 'a';` should be before `import a from 'b';`, because ordering should be based on the import path,
+  > Note: `import b from 'a';` should be before `import a from 'b';`, because ordering should be based on the import path,
   > not the import name.
 
 <a name="modules--import-member-order"></a>
 - [10.12](#modules--import-member-order) Order named imports alphabetically.
+  eslint: [`import/order`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/order.md)
 
   > Why? This makes it easier to find and understand the dependencies of a module.
 
@@ -1126,10 +1128,11 @@ Heavily inspired by and partly composed of [Airbnb JavaScript Style Guide
   import { a, b } from 'foo';
   ```
 
-<a name="modules--import-node-prefix"></a>
-- [10.13](#modules--import-node-prefix) Use `node:` prefix for Node.js built-in modules.
+<a name="modules--import-node-protocol"></a>
+- [10.13](#modules--import-node-protocol) Use `node:` protocol for Node.js built-in modules.
+  eslint: [`n/prefer-node-protocol`](https://github.com/eslint-community/eslint-plugin-n/blob/master/docs/rules/prefer-node-protocol.md)
 
-  > Why? Using the `node:` prefix makes it explicit that a module is built-in, improving clarity and avoiding conflicts with similarly named packages.
+  > Why? Using the `node:` protocol makes it explicit that a module is built-in, improving clarity and avoiding conflicts with similarly named packages.
 
   ```javascript
   // bad
