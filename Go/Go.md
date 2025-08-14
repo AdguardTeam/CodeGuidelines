@@ -617,7 +617,7 @@ See also the [text guidelines][text].
     func TestType_Method_suffix(t *testing.T) { /* … */ }
     ```
 
-- <a href="#li-4b3adb1b" id="li-4b3adb1b" name="li-4b3adb1b">§</a> Name `context.Context` helper functions that return values from the context `FooFromContext` and the ones that return a new contest with new values, `ContextWithFoo` or `WithFoo`. Just like in the standard library, the parent context should be called `parent`.
+- <a href="#li-4b3adb1b" id="li-4b3adb1b" name="li-4b3adb1b">§</a> Name `context.Context` helper functions that return values from the context `FooFromContext` and the ones that return a new context with new values, `ContextWithFoo` or `WithFoo`. Just like in the standard library, the parent context should be called `parent`.
 
     ```go
     // ContextWithFoo returns a copy of the parent context with the value of `f`
