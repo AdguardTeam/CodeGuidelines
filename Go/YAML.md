@@ -30,7 +30,7 @@
 
 - <a href="#li-442b7b18" id="li-442b7b18" name="li-442b7b18">§</a> Use `>` for multiline strings, unless you need to keep the line breaks. Use `|` for multiline strings when you do.
 
-- <a href="#li-9dfaa1a3" id="li-9dfaa1a3" name="li-9dfaa1a3">§</a> When designing a schema, prefer to keep the top level and items of all arrays objects to make it easier to extend them in the future:
+- <a href="#li-9dfaa1a3" id="li-9dfaa1a3" name="li-9dfaa1a3">§</a> When designing a schema, prefer to keep the top level and items of all arrays as objects to make it easier to extend them in the future:
 
     ```yaml
     # Not very good, hard to expand:

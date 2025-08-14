@@ -22,7 +22,7 @@ The rules are mostly sorted in the alphabetical order.
 
 - <a href="#li-cb105c8c" id="li-cb105c8c" name="li-cb105c8c">§</a> Avoid `break` and `continue` with labels. Most of the time the code can be rewritten without them, and most of the time the resulting new code is also clearer.
 
-- <a href="#li-5305b436" id="li-5305b436" name="li-5305b436">§</a> Always `recover` from panics in new goroutines. Preferably in the very first statement. If all you want there is a log message, use `log.OnPanic`.
+- <a href="#li-5305b436" id="li-5305b436" name="li-5305b436">§</a> Always `recover` from panics in new goroutines. Preferably in the very first statement. If all you want there is a log message, use `slogutil.RecoverAndLog`.
 
 - <a href="#li-02028202" id="li-02028202" name="li-02028202">§</a> Avoid `fallthrough`. It makes it harder to rearrange `case`s, to reason about the code, and also to switch the code to a handler approach, if that becomes necessary later.
 
@@ -76,7 +76,7 @@ The rules are mostly sorted in the alphabetical order.
     }
     ```
 
-- <a href="#li-d027c6cd" id="li-d027c6cd" name="li-d027c6cd">§</a> Be aware of structure alignment as well as the number of [pointer bytes][ptr]. Exceptions could be made if a suboptimal alignment produces significantly better readability.
+- <a href="#li-d027c6cd" id="li-d027c6cd" name="li-d027c6cd">§</a> Be aware of structure alignment as well as the number of [pointer bytes][ptr]. Exceptions could be made if a suboptimal alignment is required to preserve order to e.g. lower the diff in a configuration file.
 
     ```go
     // Bad!  Lots of padding between the uint64s and bools. Pointers are at the
@@ -320,14 +320,14 @@ See also the [text guidelines][text].
     ```go
     err = f()
     if err != nil {
-        // Don’t wrap the error, because it’s informative enough as is.
+        // Don't wrap the error, because it's informative enough as is.
         return err
     }
     ```
 
 - <a href="#li-17e872ff" id="li-17e872ff" name="li-17e872ff">§</a> Avoid having multiple errors in a function. In situations when it’s not feasible, use meaningful names. For example, `closeErr` for errors from `Close()` or `testErr` for subtest errors.
 
-- <a href="#li-9e172a2e" id="li-9e172a2e" name="li-9e172a2e">§</a> Avoid using the word `error` inside error messages.
+- <a href="#li-9e172a2e" id="li-9e172a2e" name="li-9e172a2e">§</a> Avoid using the word “error” inside error messages.
 
     ```go
     // BAD!
@@ -378,7 +378,7 @@ See also the [text guidelines][text].
 
 - <a href="#li-018bb84c" id="li-018bb84c" name="li-018bb84c">§</a> Decorate `break`, `continue`, `return`, and other terminating statements with empty lines unless it’s the only statement in that block.
 
-- <a href="#li-82784b41" id="li-82784b41" name="li-82784b41">§</a> Don’t group type declarations together. Unlike with blocks of `const`s, where a `iota` may be used or where all constants belong to a certain type, there is no reason to group `type`s.
+- <a href="#li-82784b41" id="li-82784b41" name="li-82784b41">§</a> Don’t group type declarations together, unless they're type aliases. Unlike with blocks of `const`s, where a `iota` may be used or where all constants belong to a certain type, there is no reason to group `type`s, unless they are a group of re-exports.
 
 - <a href="#li-baa640a3" id="li-baa640a3" name="li-baa640a3">§</a> Don’t mix horizontal and vertical placement of groups of arguments and [return values][ret] in calls and definitions of functions and methods. That is, either this:
 
@@ -740,7 +740,11 @@ See also the [text guidelines][text].
 
 - <a href="#li-b956e7a9" id="li-b956e7a9" name="li-b956e7a9">§</a> Strive to make the test suite runnable multiple times with `--count=N`. That helps finding bugs in tests and also makes it easier to diagnose rare bugs in the code.
 
-- <a href="#li-9124bf62" id="li-9124bf62" name="li-9124bf62">§</a> Use `assert.NoError` and `require.NoError` instead of `assert.Nil` and `require.Nil` on errors.
+- <a href="#li-9124bf62" id="li-9124bf62" name="li-9124bf62">§</a> Use appropriate `assert` and `require` test helpers:
+
+    - `assert.NoError` instead of `assert.Nil` and `require.Nil` with errors.
+
+    - `assert.True` and `assert.False` instead of `assert.Equal` with booleans.
 
 - <a href="#li-c12f7ecf" id="li-c12f7ecf" name="li-c12f7ecf">§</a> Use formatted helpers, like `assert.Nilf` or `require.Nilf`, instead of simple helpers when a formatted message is required.
 
