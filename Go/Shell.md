@@ -25,9 +25,9 @@ The rules are mostly sorted in the alphabetical order.
 
     <del>Avoid spaces between patterns of the same `case` condition.</del>
 
-- <a href="#li-f0aa2892" id="li-f0aa2892" name="li-f0aa2892">§</a> Don't use the option `-q` of the command `ls`. Some systems that use the Busybox version of `ash` don't support it.
+- <a href="#li-f0aa2892" id="li-f0aa2892" name="li-f0aa2892">§</a> Don’t use the option `-q` of the command `ls`. Some systems that use the Busybox version of `ash` don’t support it.
 
-- <a href="#li-4c329619" id="li-4c329619" name="li-4c329619">§</a> `export` and `readonly` should be used separately from variable assignment, because otherwise failures in command substitutions won't stop the script. That is, do this:
+- <a href="#li-4c329619" id="li-4c329619" name="li-4c329619">§</a> `export` and `readonly` should be used separately from variable assignment, because otherwise failures in command substitutions won’t stop the script. That is, do this:
 
     ```sh
     X="$(echo 42)"
@@ -43,7 +43,7 @@ The rules are mostly sorted in the alphabetical order.
 
 - <a href="#li-df531547" id="li-df531547" name="li-df531547">§</a> If a boolean value is needed, use `0` for `false`, and `1` for `true`.
 
-- <a href="#li-f41e78ee" id="li-f41e78ee" name="li-f41e78ee">§</a> Mark every variable that shouldn't change later as `readonly`.
+- <a href="#li-f41e78ee" id="li-f41e78ee" name="li-f41e78ee">§</a> Mark every variable that shouldn’t change later as `readonly`.
 
 - <a href="#li-78816dc3" id="li-78816dc3" name="li-78816dc3">§</a> Prefer `'raw strings'` to `"double quoted strings"` whenever possible.
 
@@ -55,7 +55,7 @@ The rules are mostly sorted in the alphabetical order.
 
     <del>Put spaces within `$( cmd )`, `$(( expr ))`, and `{ cmd; }`. Avoid spaces within `${var}`.</del>
 
-- <a href="#li-1e74ed3b" id="li-1e74ed3b" name="li-1e74ed3b">§</a> Put utility flags in the ASCII order and **don't** group them together. For example, `ls -1 -A -l`.
+- <a href="#li-1e74ed3b" id="li-1e74ed3b" name="li-1e74ed3b">§</a> Put utility flags in the ASCII order and **don’t** group them together. For example, `ls -1 -A -l`.
 
 - <a href="#li-be24aa66" id="li-be24aa66" name="li-be24aa66">§</a> Script code lines should not be longer than one hundred (**100**) columns. For comments, see the [text guidelines][text].
 
