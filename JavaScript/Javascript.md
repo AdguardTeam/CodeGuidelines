@@ -1061,6 +1061,87 @@ Heavily inspired by and partly composed of [Airbnb JavaScript Style Guide
   import baz from './baz';
   ```
 
+<a name="modules--import-grouping"></a>
+- [10.10](#modules--import-grouping) Imports should be grouped into the following categories, separated by blank lines:
+  eslint: [`import/order`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/order.md)
+
+  - Built-in modules (i.e. Node.js modules)
+  - External modules (i.e. packages from npm)
+  - Parent internal modules (i.e. modules from the same project, below the current directory, e.g. `../foo` or `../../foo`)
+  - Sibling internal modules (i.e. modules from the same project, at the same directory level as the current file, e.g. `./foo`)
+
+  > Why? This makes it easier to find and understand the dependencies of a module.
+  > This way, we have the "most far" dependencies in the top, then the "most close" dependencies in the bottom.
+
+  ```javascript
+  // bad
+  import foo from './foo';
+  import fs from 'node:fs';
+  import bar from '../bar';
+  import npmPackage from 'npm-package';
+
+  // good
+  import fs from 'node:fs';
+  import npmPackage from 'npm-package';
+
+  import bar from '../bar';
+
+  import foo from './foo';
+  ```
+
+<a name="modules--import-order"></a>
+- [10.11](#modules--import-order) Order imports alphabetically within each import group. Order should happen based on the import path.
+  eslint: [`import/order`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/order.md)
+
+  > Why? This makes it easier to find and understand the dependencies of a module.
+
+  ```javascript
+  // bad
+  import b from 'b';
+  import a from 'a';
+
+  import d from '../d';
+  import c from '../c';
+
+  // good
+  import a from 'a';
+  import b from 'b';
+
+  import c from '../c';
+  import d from '../d';
+  ```
+
+  > Note: `import b from 'a';` should be before `import a from 'b';`, because ordering should be based on the import path,
+  > not the import name.
+
+<a name="modules--import-member-order"></a>
+- [10.12](#modules--import-member-order) Order named imports alphabetically.
+  eslint: [`import/order`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/order.md) / [`sort-imports`](https://eslint.org/docs/latest/rules/sort-imports)
+
+  > Why? This makes it easier to find and understand the dependencies of a module.
+
+  ```javascript
+  // bad
+  import { b, a } from 'foo';
+
+  // good
+  import { a, b } from 'foo';
+  ```
+
+<a name="modules--import-node-protocol"></a>
+- [10.13](#modules--import-node-protocol) Use `node:` protocol for Node.js built-in modules.
+  eslint: [`n/prefer-node-protocol`](https://github.com/eslint-community/eslint-plugin-n/blob/master/docs/rules/prefer-node-protocol.md)
+
+  > Why? Using the `node:` protocol makes it explicit that a module is built-in, improving clarity and avoiding conflicts with similarly named packages.
+
+  ```javascript
+  // bad
+  import fs from 'fs';
+
+  // good
+  import fs from 'node:fs';
+  ```
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Properties
