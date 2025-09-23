@@ -46,11 +46,11 @@ The rules are mostly sorted in the alphabetical order.
     // Bad!  Resource r is only closed at the end of the very long function.
     func Foo() (err error) {
         r, err := open()
-        check(err)
+        errors.Check(err)
         defer r.close()
 
         v, err := decode(r)
-        check(err)
+        errors.Check(err)
 
         // Lots of slow stuff with v. r is only closed once Foo exits.
     }
@@ -62,14 +62,14 @@ The rules are mostly sorted in the alphabetical order.
     // Good, r is closed after loadV returns.
     func Foo() (err error) {
         v, err := loadV()
-        check(err)
+        errors.Check(err)
 
         // Lots of slow stuff with v.
     }
 
     func loadV() (v *V, err error) {
         r, err := open()
-        check(err)
+        errors.Check(err)
         defer r.close()
 
         return decode(r)
@@ -353,7 +353,7 @@ See also the [text guidelines][text].
 
     ```go
     // Bad!
-    errors.Check(f(g())
+    errors.Check(f(g()))
 
     // Good.
     errors.Check(f())
