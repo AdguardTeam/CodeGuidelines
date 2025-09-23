@@ -14,8 +14,8 @@
   "no-inline-html": {
     "allowed_elements": [
       "a",
-      "del",
       "br",
+      "del",
       "details",
       "iframe",
       "summary"

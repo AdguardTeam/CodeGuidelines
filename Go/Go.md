@@ -349,6 +349,16 @@ See also the [text guidelines][text].
 
 - <a href="#li-31fae402" id="li-31fae402" name="li-31fae402">§</a> Parsing functions should include the invalid input into the error message, unless the input is too big.
 
+- <a href="#li-3abc59aa" id="li-3abc59aa" name="li-3abc59aa">§</a> Prefer to not use more than one level of expressions within `errors.Check` and `errors.Must` arguments.
+
+    ```go
+    // Bad!
+    errors.Check(f(g())
+
+    // Good.
+    errors.Check(f())
+    ```
+
 - <a href="#li-be5ea7a7" id="li-be5ea7a7" name="li-be5ea7a7">§</a> Use only lowercase unless you have to reference an identifier in code or the project has its own conventions regarding uppercase letters.
 
 - <a href="#li-6d1104bd" id="li-6d1104bd" name="li-6d1104bd">§</a> Use `panic` **only** to indicate critical assertion failures. **Do not** use panics for normal error handling.
@@ -453,6 +463,10 @@ See also the [text guidelines][text].
     ```
 
 - <a href="#li-73ab5406" id="li-73ab5406" name="li-73ab5406">§</a> Don’t write code with more than four (**4**) levels of indentation. Just like [Linus said][3tabs], plus an additional level for an occasional error check or struct initialization.
+
+    > [!IMPORTANT]
+    >
+    > This rule may be ignored in projects that have maintainability index for non-test and test code above 40 and 30 respectively.
 
 - <a href="#li-537482f3" id="li-537482f3" name="li-537482f3">§</a> Group `require.*` blocks together with the preceding related statements, but separate from the following `assert.*` and unrelated requirements.
 
@@ -749,6 +763,23 @@ See also the [text guidelines][text].
 - <a href="#li-c12f7ecf" id="li-c12f7ecf" name="li-c12f7ecf">§</a> Use formatted helpers, like `assert.Nilf` or `require.Nilf`, instead of simple helpers when a formatted message is required.
 
 - <a href="#li-2b1b6414" id="li-2b1b6414" name="li-2b1b6414">§</a> Use functions like `require.Foo` instead of `assert.Foo` when the test cannot continue if the condition is false.
+
+- <a href="#li-02ca2e83" id="li-02ca2e83" name="li-02ca2e83">§</a> When writing benchmarks, remember that there are no warmup runs, so any warmup to e.g. fill `sync.Pool`s and internal buffers should be done explicitly.
+
+- <a href="#li-3459f4c4" id="li-3459f4c4" name="li-3459f4c4">§</a> In benchmarks, put the most recent results on your machine at the end of the benchmark function for future reference:
+
+    <!-- markdownlint-disable MD010 -->
+
+    ```go
+    // Most recent results:
+    //	goos: linux
+    //	goarch: amd64
+    //	pkg: github.com/AdguardTeam/FooService/internal/foo
+    //	cpu: AMD Ryzen 7 PRO 4750U with Radeon Graphics
+    //	BenchmarkFoo-16         	  911409	      1315 ns/op	      24 B/op	       1 allocs/op
+    ```
+
+    <!-- markdownlint-enable MD010 -->
 
 [tpkg]: https://pkg.go.dev/cmd/go@master#hdr-Test_packages
 
