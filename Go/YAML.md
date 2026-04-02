@@ -2,7 +2,7 @@
 
 > [!NOTE]
 >
-> Some rules are deprecated. New code should instead use [`yamlfmt`] and follow the configuration and guidelines favored by the Content Team.
+> Some rules are deprecated. New code should instead use [`yamlfmt`].
 
 - **TODO(a.garipov):** Define naming conventions for schema names in our OpenAPI YAML file. And just generally OpenAPI conventions.
 
