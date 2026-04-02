@@ -25,6 +25,8 @@ The rules are mostly sorted in the alphabetical order.
 
     <del>Avoid spaces between patterns of the same `case` condition.</del>
 
+- <a href="#li-12b65a16" id="li-12b65a16" name="li-12b65a16">§</a> Decorate `break`, `continue`, `return`, and other terminating statements with empty lines unless it’s the only statement in that block.
+
 - <a href="#li-f0aa2892" id="li-f0aa2892" name="li-f0aa2892">§</a> Don’t use the option `-q` of the command `ls`. Some systems that use the Busybox version of `ash` don’t support it.
 
 - <a href="#li-4c329619" id="li-4c329619" name="li-4c329619">§</a> `export` and `readonly` should be used separately from variable assignment, because otherwise failures in command substitutions won’t stop the script. That is, do this:

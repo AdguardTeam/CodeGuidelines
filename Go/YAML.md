@@ -1,14 +1,34 @@
 # AdGuard Go Team YAML guidelines
 
+> [!NOTE]
+>
+> Some rules are deprecated. New code should instead use [`yamlfmt`] and follow the configuration and guidelines favored by the Content Team.
+
 - **TODO(a.garipov):** Define naming conventions for schema names in our OpenAPI YAML file. And just generally OpenAPI conventions.
 
-- **TODO(a.garipov):** Find a YAML formatter that retains comments or write our own.
+- <a href="#li-c412a475" id="li-c412a475" name="li-c412a475">§</a> All strings, including keys, should be quoted. Reason: the “[NO-rway Law]”.
 
-- <a href="#li-c412a475" id="li-c412a475" name="li-c412a475">§</a> All strings, including keys, must be quoted. Reason: the “[NO-rway Law]”.
+- <a href="#li-2a425f43" id="li-2a425f43" name="li-2a425f43">§</a>
 
-- <a href="#li-2a425f43" id="li-2a425f43" name="li-2a425f43">§</a> Indent with four (**4**) spaces.
+    > [!WARNING]
+    >
+    > This rule is deprecated. See message at the beginning of the document.
 
-- <a href="#li-231fdb57" id="li-231fdb57" name="li-231fdb57">§</a> Multiline arrays should be formatted with two spaces, one hyphen, and one space:
+    <del>
+
+    Indent with four (**4**) spaces.
+
+    </del>
+
+- <a href="#li-231fdb57" id="li-231fdb57" name="li-231fdb57">§</a>
+
+    > [!WARNING]
+    >
+    > This rule is deprecated. See message at the beginning of the document.
+
+    <del>
+
+    Multiline arrays should be formatted with two spaces, one hyphen, and one space:
 
     ```yaml
     'values':
@@ -25,6 +45,8 @@
         - 'value-2'
         - 'value-3'
     ```
+
+    </del>
 
 - <a href="#li-2af45c9c" id="li-2af45c9c" name="li-2af45c9c">§</a> Prefer single quotes for strings to prevent accidental escaping, unless escaping is required or there are single quotes inside the string (e.g. for GitHub Actions).
 
@@ -44,3 +66,4 @@
     ```
 
 [NO-rway Law]: https://news.ycombinator.com/item?id=17359376
+[`yamlfmt`]:   https://github.com/google/yamlfmt/
